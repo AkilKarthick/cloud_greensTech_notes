@@ -1,1 +1,77 @@
 aws interview question:
+
+what is EC2 instance and its types?
+
+EC2 - elastic compute cloud;
+a web servive that provide resizable compute capacity in the cloud
+allow you to run virtual machine(intance ) on AWS
+
+common instance types are:
+
+General Purpose: t4g, t3, t2, m6g, m5
+Compute Optimized: c7g, c6g, c5
+Memory Optimized: r7g, r6g, r5, x2
+Storage Optimized: i4, i3, d2
+Accelerated Computing: p4, p3, inf1
+
+2. steps to launch ec2 instances?
+
+loginto aws console-ec2 dashboard
+click launch ec2
+choose an ami amazon machine image
+select instance type eg(t2.micro)
+configure instance details
+add storage
+configure security group
+launch and download the key pair
+
+for eg creatinnf free tire
+give 
+name and tag >
+ami ie os needed for eg(amazon linux/mac os/ ubuntu / windows/ redhat/suse linux/debian)
+select free tire elligible eg microsoft windows server 2022 base
+then select instanve type
+for a sever how much ram/memory is needed ,how many virtual cpu is needed
+there are multiple family present on the intance type select based up on your need
+t2.micro free tire one 
+then
+key pair
+public key - it saved on a path during the time we are creating
+private key - we need to dowd this on our local
+
+it will match those during the login
+
+.pem - use with open ssh
+.ppk - for use with putty
+
+on network setting 
+newtwork; - vpc 
+subnet - no preference
+auto assign public ip - enable
+firewall(security group)
+      conrtoll the traffic for your instance
+allow RDP traffice - for windows
+
+in security group
+0---65535
+rdp--3389   (remote desktop protocal)
+ssh -22 (secure shell host) we need to enable this to login our machin
+we can able to login our server only if the above rdp port num is enable
+
+storage: max 30() for free tire
+finally lanch instance  -- it is now in running state
+
+select the isntance -> connect--> select RDP client
+we can able to see 
+public DNS
+username
+click on the get password link
+now we get the instanve id and key oaru assoicated with insatnve and we need to upload the 
+private key
+need to decrupt this 
+open remote desktop protocal
+give public dns on compute gave username and pwd
+your server will up now ;)
+
+
+
