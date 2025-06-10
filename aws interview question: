@@ -19,6 +19,7 @@ Accelerated Computing: p4, p3, inf1
 loginto aws console-ec2 dashboard
 click launch ec2
 choose an ami amazon machine image
+---- is a template that contains the software configuration (OS, application server, applications).
 select instance type eg(t2.micro)
 configure instance details
 add storage
@@ -27,30 +28,30 @@ launch and download the key pair
 
 for eg creatinnf free tire
 give 
-name and tag >
-ami ie os needed for eg(amazon linux/mac os/ ubuntu / windows/ redhat/suse linux/debian)
-select free tire elligible eg microsoft windows server 2022 base
-then select instanve type
-for a sever how much ram/memory is needed ,how many virtual cpu is needed
-there are multiple family present on the intance type select based up on your need
-t2.micro free tire one 
-then
-key pair
-public key - it saved on a path during the time we are creating
-private key - we need to dowd this on our local
+step1: name and tag >
+      ami ie os needed for eg(amazon linux/mac os/ ubuntu / windows/ redhat/suse linux/debian)
+      select free tire elligible eg microsoft windows server 2022 base
+step2:then select instanve type
+      for a sever how much ram/memory is needed ,how many virtual cpu is needed
+      there are multiple family present on the intance type select based up on your need
+      t2.micro free tire one 
+      then
+step3: key pair
+      public key - it saved on a path during the time we are creating
+      private key - we need to dowd this on our local
 
 it will match those during the login
 
 .pem - use with open ssh
 .ppk - for use with putty
 
-on network setting 
-newtwork; - vpc 
-subnet - no preference
-auto assign public ip - enable
-firewall(security group)
-      conrtoll the traffic for your instance
-allow RDP traffice - for windows
+step4:on network setting 
+      newtwork; - vpc 
+      subnet - no preference
+      auto assign public ip - enable
+      firewall(security group)
+            conrtoll the traffic for your instance
+      allow RDP traffice - for windows
 
 in security group
 0---65535
@@ -63,15 +64,15 @@ finally lanch instance  -- it is now in running state
 
 select the isntance -> connect--> select RDP client
 we can able to see 
-public DNS
-username
-click on the get password link
+      public DNS
+      username
+      click on the get password link
 now we get the instanve id and key oaru assoicated with insatnve and we need to upload the 
 private key
 need to decrupt this 
 open remote desktop protocal
-give public dns on compute gave username and pwd
-your server will up now ;)
+      give public dns on compute gave username and pwd
+      your server will up now ;)
 
 
 
