@@ -1,1 +1,75 @@
+linux day 1 notes-----
+
+ec2-user- non root user dont have full peromission
+
+  == to give admin access like changing to root user
+
+sudo -i 
+
+~ symbol insidcate that you are in desktop or core
+
+cd/     | means change directory
+ls      | to know the lisst of elements(directory,files etc)
+ls -ltr  |  to know the long list /deep drive
+
+clear  | clear my screen 
+ctrl+l  | to clear my screen
+
+linux file system:
+
+bin->usr/bin   = non root user 
+sbin->usr/bin  = root user runnable comment present inside 
+
+boot   = restarting/bootin related file
+dev  = devices details present here
+etc   = configuration related to eg /c (have user details os files progm details app insaatleled)
+home  = non root user details present inside this 
+        non root user directory eg ec2-user
+root  = root user directry
+
+lib 32  =
+lib64   =
+
+mnt = external disk or hd. we need to attach here
+opt = thire party applciaiton installed over here
+proc  =process releated files
+run
+sys
+srv
+usr
+var
+tmp = put our file temporaryly for 10 days/ if inactive means deleted if active it won't felete
+
+ls var
+tmp = here it temporarlyh store for 30 days
+-------
+
+pwd  
+    to know the present working directory
+cd ..
+    to go previous step
+cd .
+    to represent home directory
+
+ls -a
+  to know the hiddne files/configuation files
+
+touch filename  = to create empty file
+eg: touch greens.txt
+
+mkdir foldername 
+      = make directory
+
+to copy file
+
+cp  src destination
+
+
+
+    
+
+
+
+
+
 
