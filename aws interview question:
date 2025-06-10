@@ -2,9 +2,9 @@ aws interview question:
 
 what is EC2 instance and its types?
 
+It's a virtual server in the cloud that I can launch to host applications or run workloads.
 EC2 - elastic compute cloud;
-a web servive that provide resizable compute capacity in the cloud
-allow you to run virtual machine(intance ) on AWS
+a web servive that provide resizable compute capacity in the cloud allow you to run virtual machine(intance ) on AWS
 
 common instance types are:
 
@@ -73,6 +73,30 @@ need to decrupt this
 open remote desktop protocal
       give public dns on compute gave username and pwd
       your server will up now ;)
+
+what is AMI?
+it contains the operating system and app software used to launch EC2 instances.
+
+what is key pair?
+A combination of a public and private key used to connect securely to EC2 via SSHc
+
+What is a Security Group?
+It's a virtual firewall that controls inbound and outbound traffic to EC2.
+
+what happend when What happens when EC2 instance stops? Terminates?What happens when EC2 instance stops? Terminates?
+
+when stopped!!
+it is like shutting down coputer. but data remain on EBS, public ip is released unlsee it is an elasic ip
+you can start the instnace again later(new host machine may be assigend)
+you are charged for EBS storeage not for compute EC@ instnace hour
+
+when EC2 is terminated!
+permenentally deleted, the default root EBS voulme is deleted(unless delete on terminatino is checked)
+instanve cannt be started again, the pubiic IP is released
+you stop being charged for both EC2 and EBS
+
+Termination is permanent – the instance and its volumes are deleted,
+so we must ensure backups or snapshots are taken before terminating
 
 
 
