@@ -42,8 +42,8 @@ step3: key pair
 
 it will match those during the login
 
-.pem - use with open ssh
-.ppk - for use with putty
+.pem - use with open ssh  private enhanced key
+.ppk - for use with putty putty private key
 
 step4:on network setting 
       newtwork; - vpc 
