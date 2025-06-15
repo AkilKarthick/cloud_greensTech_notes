@@ -1,2 +1,58 @@
 Linux_D02
 
+User and Group - 
+file permission - 
+---------------
+
+1. whoami  
+  -- dispay user name
+
+2. sudo -i 
+   to switch to root user
+eg: 
+sudo -i
+pwd
+/root 
+ for non root user we get like /home/ec2-user
+
+3. cat /etc/pa  - will print all user information
+
+lets decode this below
+
+ec2-user:x:1000:1000:cloud userz:/home/ec2-user:/bin/bash
+
+username: password:userid:groupid:description(mention role): home path: /bin/bash(which means they can use shell ) 
+
+userid: auto increment
+groupid: auto increment
+
+/bin/bash  - whcih means user can login
+/bin/bash/nologin - means user can't able to login
+
+4. tail /etc/password  -it will print last 10 lines
+5. head /et/password - it will print first 10 lines
+
+also we can give like below
+
+head -3 /etc/passwd  -it will print firt 3 
+
+6. cat /etc/shadow
+print user duration of timing and logging
+
+7. useradd manoj
+  tail -3 /etc/passwd
+
+it will shows like
+
+one more data
+ec2-user:x:1000:1000:cloud userz:/home/ec2-user:/bin/bash
+manoj:x:1001:1002::/home/manoj:/bin/bash
+
+
+
+
+
+
+
+
+
