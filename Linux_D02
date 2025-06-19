@@ -48,6 +48,117 @@ one more data
 ec2-user:x:1000:1000:cloud userz:/home/ec2-user:/bin/bash
 manoj:x:1001:1002::/home/manoj:/bin/bash
 
+8. cat /etc/group
+will list grou and grouid
+
+9. groupadd orange
+  cat /etc/group
+it will create new group orange :x:1002
+
+intially no user present on the group so i'm going to add the user 
+
+syntax: usermod -aG [group] [username] - so that new user added on the group
+
+-a add
+G group
+
+usermod -aG orange manoj
+usermod -aG orange manoj1
+
+it will add like orange:x:1002:manoj,root
+
+if you want to go like created user 
+to swithc user
+su username
+su manoj
+{manoj@ip-172-31-0-163] root $
+
+cd + enter
+redirect to home path
+
+10, to create a file
+  touch filname
+
+11. to see th hidden files
+  ll -a
+
+usually single dot and double dott comes on all printed list
+. single = represent current directory
+.. double = represent parent directory
+
+12. to change the file owner
+
+touch filname
+will create file on root user
+
+-rw-r--r--. 1 root root date file
+ > chown ec2-user file   - this will change the file to ec2 user owner
+we can also give like
+chown ec2-user:ec2-user file - this will change the group too
+
+if want to change group only means
+
+chown :orange file
+cheown :groupname filename
+
+if you want to change for all 
+
+chown -R: orange file - this will chnage for all the sub dorectpry as well
+
+-rwxr--r--
+read  - only view
+write - create file modify delete 
+execute - to run the application eg .sh
+
+here mostly .sh so it we wanna to execute that
+
+-rwx r-- r--. 1 root root date file
+user,group,other (for all other user)
+
+to set this we ahve a methodology
+
+read -4
+write -2
+execute -1
+
+chmod - to change modify
+
+chmod 111 all have execute permisson no righ read
+chmod 311
+chmod user (write+execute) group exect, other exeucte
+
+another way is ther to add permission 
+
+for eg:
+mkdir play
+ls -a
+drwxr-xr-x 2 root rooot date play
+
+chmod g+w play  = this will add write permission to the group
+if 
+chmod g=rw play = this will add read write only and remove the additional
+chmod g-x play = this will remove /substract eh execute permssion 
+chmod -R recuresively change all subdirect file as well
+
+chmod +t play
+now we get
+-rwxrwxr--t 1 ec2-user orange date file
+ file get highilgted 
+denote sticky bit other can see the file but can 't edit even they haev permission
+or ese
+chmod1777 
+
+simply said like mathavnaga aduthavange files read panamduiaythu called sticky bit
+
+
+
+
+
+
+
+
+
+
 
 
 
