@@ -1,1 +1,41 @@
 S3 bucket interview questions::
+
+1.What is Amazon S3 and how does it work?
+
+Amazon S3 (Simple Storage Service) is object storage built for storing and 
+retrieving any amount of data. 
+You store data as objects inside buckets. Each object can be up to 5 TB.
+
+s3 bucket vs object?
+
+a bucket is a container for storing objcet
+an object is the actual data with metadata stored inside a bucket
+
+storeage class in S3?
+
+standard  - fro frequent access
+intelligent tire - for automatic cost saving
+one zone IA - infrequetn access in a single zone
+glacier/Deep archeive - for archival very low cost
+
+durabillity & availbility: 
+ s3 privides 99.999% durability by automaticallyt soring data across multiple devices and AZ
+maximum object size 5TB
+
+versioning: keep multiple version of an object. Enables recovery from unintended overwirtes or deltion
+pre signed URL- temporary access links to private objecfts. useful for sharing without making the 
+objet publie
+
+S3 vs EBS:
+
+s3 object storage.. accessible over HTTPs great for static content
+
+EBS-block storage, attacged to EC2, used as a disk
+
+ADvanced concept::
+
+Lifccycle policies
+cross region replication
+encryption in s3:
+
+
