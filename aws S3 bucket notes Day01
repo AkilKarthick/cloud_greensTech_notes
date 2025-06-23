@@ -1,1 +1,77 @@
 aws S3 bucket notes Day01
+
+s3- simple sotrage servie -- it is an unlimited storage
+
+types of storage in aws
+
+block-
+object-
+file-
+
+cheap, high availalbitlit  & durability
+
+bucket-like afile system are contaiiner for data sotred in s3
+object- fi.e & folder that we store on file system
+
+for each aws accoutn i'ma ble to create 100 bucket
+
+i can create any number of object on a bucket so it si unlimited!!
+1 acc --> 100 bucket
+1 object --> 5tb
+
+if we reached the limit 100 bucket per account , if we need additional 20 bucket then
+we can reachout to aws support & tell the requirement the it's possible
+
+s3 
+scalable storagein the cloud
+
+we havee 
+1.general purpose bucket - it's like a ware house
+& 
+2.direcotry bucket - eg college related data;s on colg direcotory
+
+how to create a s3 bucket
+
+step1: select region first 
+step2: bucket name should be unique, we have option like copy setting from existing bucket- option is there\
+step3: object ownership
+        we have ACL access control list
+        if this ACL is enable then, object'sin the bucket can be owned by other AWS account.
+        access to the bucket and its object can be specififed by acl.
+if it is disable: then i have the privligedd to allow the people whom all are need to use
+step4: 
+
+we have public bucket-
+        private bucket-
+
+bucket -- obj --res
+public   pub  -  everyone can accesss  the bucket
+pub      private  -only bucket accees isn there obje is private bcz of perimssion
+pvt      pvt      - only permission user are allowded to access
+pvt      public    - obbj is not accessible , but each obj has an unique URL . we can access over there\
+
+step5: block public access setting for this bucket
+      by default is is private, if we want we can change by unslect that
+
+step6:bucket versioning
+step7: we have encryptoin option
+step8: click on create bucket
+
+after uploading an file
+we need to select 
+storage class on properties file
+
+standard              - frequenty accessed data morethan once a month wih millisecond acccess
+intellignet tiering   -
+one zone IA
+glacier instant retreievla
+glacier flexible
+
+
+
+
+
+
+
+
+
