@@ -1,0 +1,103 @@
+how to deploy static website on windows and linux--
+
+
+EC2 App Hosting
+
+Application hosting
+
+windows -- IIS (internet information service)
+linux --Apach (httpd) / nginx  
+        different brand no big difference
+
+
+1.hardware  -ec2
+2.middleware  
+    a.Webserver = static webpage (szme content)
+    b.appserver = dynamic web page (different content)
+
+for eg:
+1 tier only UI
+2. tier with DB
+3. tire static/dymamic and DB
+
+3.sofware - we can say it as a Source code
+------------
+
+we are going to do app hosting
+
+do launch instance- windows system:
+  follow the same step for creating an EC2 instance
+  then most importantly on Network Settings
+  select --- Allow Http taffic from internet---
+    becaseu for a website we should have http and https
+  
+  for EG:
+  https://www.fb.com == s indicate it have sercurity certificate
+
+step2:
+for windows how to insatell IIS
+  click on start->server manager hint(wait untill the blue line get completed)
+it will get configure by automatically 
+then on the serverManager-dashboard
+  go to > ADD roles and feature
+         clicl on next untill > serrver Roles session tab on popup window
+          select Web SERvet (IIS) >> click on next finally do install 
+
+now go to the file manager--
+
+  locadiscC/inetpub/wwwroot/ delete the existing file presen there 
+  and do cpy the static file content there 
+
+
+----------------------------
+do laucnh instance- linux system::
+
+
+  here also plz provide --http traffic from internet-- on network settings
+
+step2: going to install the middelware
+       >   yum install httpd -y
+
+installation done for Apache
+
+for checking purpose
+
+do copy the linux IP address on the console0,
+hit it on the broweer it should come apache server
+
+even thought the installtion completed but Apache Http server is still inactive
+we can che k by suing the command >> service httpd status
+
+we need to execute this cmmand now
+>> service httpd start
+
+now go and check on the browser you can able to see ---1IT works --
+
+cd/var/www/hmtl  - over here you need to put all our website content 
+
+we have zip file only right on S3 so do copy the s3 private url and 
+
+wget copyofTheS3URL
+unzip filename
+
+cd bootstrap-template 
+cp -r ./var/www/html
+
+it will copy the file to html location
+
+now just hit the ip address on the browser you can able to see your website
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
