@@ -1,0 +1,86 @@
+EC2-Advance
+
+ec2--1ebs + 1 ebs
+
+we are going to add Extra volume by hititng advance option fpr both windows and linux
+add new volume
+ size 5gb and change yes for Delete on termination option
+   do launch the windows instance
+     
+on windows
+     open disk Management
+     open the unallocated disk 5gb
+     make it as online by right click
+     and do intialize disk option too > it will be on unallocated 
+       now select New Simple Volume click on Next , you can split and use or use the same as per your need
+
+
+for linux
+1.  df -h    == to see the disk file system on human readable way
+  it will only show the usage disk not the extra volume we have added 
+
+  /dev/xvda1  8.0gb
+
+2. lsblk    == list block to see the hidden storage of created volume
+    we can able to see the 
+  xvdb  3gb 0 disk
+
+3. firstly need to specify this unallocated volume
+
+  file -s /dev/svdb
+ now  you volume is  a raw volume, so make file system for linux ext4 type volume 
+  mkfs -t ext4 /dev/xvdb
+
+   still it won't show on file system same like windows, but on windows you need to create a 
+   directory using 
+   
+   mkdir greens
+
+   now list those using ls
+   now you need to mount this greens folder with 3gb volume. to commmunicate those
+
+   mount /de/svdb greens/
+   df -h
+
+   now /dev/xvdb 3gb will list now on the file system after mouting
+
+   -----------SNAPSHOT = backup of my ebs
+   every 15 to 30 min backup for volume happne on real time 
+
+   touch hi hello hey
+   this will create three new file on greens folder
+
+     go to snapshot on the dashboard comes under
+     elastic Block storeage list
+
+     goin to create a snapshot for 3gb
+
+       create snapshot
+       resource type . select voulume
+        create snapshot
+
+       to use this snapshot just go to instance 
+       launch instance
+
+       there under storage(volumes) we have advanced option 
+       there we have snapshot option is there do select you created listed snashot on the drop down
+         kindly give delete on termination to yes
+
+         no need to mount it will format the disak of snapshot just mkdire and see 
+
+         public ip- dynamic ip
+         privte ip= static ip
+
+         elastic ip --> static ip
+       
+       
+   
+   
+   
+   
+  
+  
+  
+       
+       
+
