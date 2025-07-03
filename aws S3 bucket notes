@@ -27,31 +27,36 @@ if we reached the limit 100 bucket per account , if we need additional 20 bucket
 we can reachout to aws support & tell the requirement the it's possible
 
 s3 
-scalable storagein the cloud
+scalable storage in the cloud
 
 we have
         1.general purpose bucket - it's like a ware house
-        2.direcotry bucket - eg college related data;s on colg direcotory
+        2.direcotry bucket - structural bucket
+                                eg college related data;s on colg direcotory , clg id . student id. etc
+                                each session data's present here
+======================================================
 
-how to create a s3 bucket
+how to create a s3 bucket || General purpose bucket ||
 
-step1: select region first 
+step1: select region first eg uk or india whateve
 step2: bucket name should be unique, we have option like copy setting from existing bucket- option is there\
-step3: object ownership
+step3: object ownership, ACL should disabled(recommended)
         we have ACL access control list
         if this ACL is enable then, object'sin the bucket can be owned by other AWS account.
-        access to the bucket and its object can be specififed by acl.
+        access to the bucket and its object can be specififed by ACL.
 if it is disable: then i have the privligedd to allow the people whom all are need to use
-step4: 
 
-we have public bucket-
+step4: 
+we have public bucket- 
         private bucket-
 
-bucket -- obj --res
-public   pub  -  everyone can accesss  the bucket
-pub      private  -only bucket accees isn there obje is private bcz of perimssion
-pvt      pvt      - only permission user are allowded to access
-pvt      public    - obbj is not accessible , but each obj has an unique URL . we can access over there\
+Bucket --   object       --res
+public      public   -everyone can accesss bucket
+public      private  -only bucket accees is there, but object is private so obj is not accessible,only perimssion user can access that
+private     private  -only permission user are allowded to access the bucket
+private     public   -you have to go inside bukcet first to access obj so not acessible right?
+                      obj is not accessible,
+                      but each objECT has an unique URL . we can access over there using that URL.
 
 step5: block public access setting for this bucket
       by default is is private, if we want we can change by unslect that
