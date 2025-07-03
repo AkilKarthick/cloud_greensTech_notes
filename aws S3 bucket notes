@@ -58,12 +58,25 @@ private     public   -you have to go inside bukcet first to access obj so not ac
                       obj is not accessible,
                       but each objECT has an unique URL . we can access over there using that URL.
 
-step5: block public access setting for this bucket
-      by default is is private, if we want we can change by unslect that
+step5: block public access- to make your bucket private
+        if you are planning to host a static webiste, unchekc this bo so that
+        everyone can access your website.
 
 step6:bucket versioning
+        
+        
 step7: we have encryption option
 step8: click on create bucket
+
+**-----------------------------**
+uplod a file in Amazon s3 bucket
+
+clic on bucket name that you have created, go to the Objec tab
+clic on upload button to upload file or create folder to create subflder 
+inside the bucket
+
+
+
 
 after uploading an file
 we need to select 
@@ -74,6 +87,14 @@ intellignet tiering   -
 one zone IA
 glacier instant retreievla
 glacier flexible
+
+
+================
+lex content
+
+amazon s3 is an object stroage service that offers industory leading scalability,
+data availability, security and performance
+
 
 
 
