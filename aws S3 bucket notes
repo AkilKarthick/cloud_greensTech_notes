@@ -1,23 +1,27 @@
-aws S3 bucket notes Day01
+aws S3 bucket notes
+=====================
 
 s3- simple storage servie -- it is an unlimited storage
 
-types of storage in aws
+Types of storage in aws
+1.Block-
+2.Object- s3
+3.File-
 
-block-
-object-
-file-
+so i can store anything as an object is S3, 
+most cheapest,cost kammi, 
+high availalbitlit  &
+durability ()
 
-cheap, high availalbitlit  & durability
+in S3 we have two concept::
+        1.bucket-like a file system are contaiiner for data sotred in s3
+        2.object- file & folder that we store on file system
 
-1.bucket-like a file system are contaiiner for data sotred in s3
-2.object- file & folder that we store on file system
+for each aws account we can able to create "100" bucket only
+but we can create any number of object on a bucket so it is unlimited!!
 
-for each aws accoutn we can able  to create "100" bucket
-
-i can create any number of object on a bucket so it si unlimited!!
 1 acc --> 100 bucket
-1 object --> 5tb
+1 object --> 5tb (size)
 
 if we reached the limit 100 bucket per account , if we need additional 20 bucket then
 we can reachout to aws support & tell the requirement the it's possible
