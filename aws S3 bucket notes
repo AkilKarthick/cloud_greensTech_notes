@@ -26,12 +26,12 @@ but we can create any number of object on a bucket so it is unlimited!!
 if we reached the limit 100 bucket per account , if we need additional 20 bucket then
 we can reachout to aws support & tell the requirement the it's possible
 
-s3 
+s3
 scalable storage in the cloud
 
 we have
         1.general purpose bucket - it's like a ware house
-        2.direcotry bucket - structural bucket
+        2.directory bucket - structural bucket
                                 eg college related data;s on colg direcotory , clg id . student id. etc
                                 each session data's present here
 ======================================================
@@ -74,7 +74,6 @@ intellignet tiering   -
 one zone IA
 glacier instant retreievla
 glacier flexible
-
 
 
 
