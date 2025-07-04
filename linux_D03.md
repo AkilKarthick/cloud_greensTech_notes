@@ -1,6 +1,6 @@
-#linux D4#
+#linux D4
 
-**in real time what kind of linux we use?**
+##in real time what kind of linux we use?
 
 it depends up on organization budget, some use redhat, some use centos, maybe debian , ubuntu 
 
