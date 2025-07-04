@@ -9,7 +9,7 @@ bcz redhat is modifed by them, if you facing any issue on feature that you could
 -linux provided support wiill help on this 
 
 **to connect to redhat linux**
-
+--
 
 while connec to instance> go to ssh client tab 
 do copy ssh command listed there
