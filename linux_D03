@@ -51,9 +51,55 @@ yum infor nginx   == information of the nginx will list thier
 
 yum remove nginx  == it will remove the application
 --
+
+so SystemCTl command is used to manage our applcaiton preent on system 
 to check the status of ngnix we are asking to system 
 
 systemctl status nginix == 
+
+systemctl 
+-----------
+status
+start
+stop
+restart
+enable
+disable
+-----------
+
+vimdiff == a tool for editing purpose
+vi
+
+shortcut to use on editor
+1.to search use==  :/
+
+2. to finnd and replace all
+syntax:  :%s /find/replace
+    :%s /controller/server
+
+3. to find and replace one word
+put your cursor on that specific line
+syntzx:  :s/find/replace
+thne :s/server/client
+
+4.to undo and redoo
+
+u == to undo
+ctrl + r == to redoo
+
+5. to open multpl file on single scree
+
+:split/file2
+to switch betwwn file use == ctrl + ww
+
+
+
+
+
+
+
+
+
 
 
 
