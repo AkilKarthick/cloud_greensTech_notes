@@ -20,7 +20,6 @@ cd Download
 past that ssh command 
 give yes for 
 it will ask us to enforece your licence by providig activation key / organization / rhc connect
-------------------
 
 **how to update , package installation and managing **
 how you will install any application on your mac/os
