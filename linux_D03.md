@@ -1,6 +1,6 @@
-#linux D4#
+linux D4
 
-##in real time what kind of linux we use?##
+in real time what kind of linux we use?
 
 it depends up on organization budget, some use redhat, some use centos, maybe debian , ubuntu 
 
@@ -9,7 +9,7 @@ bcz redhat is modifed by them, if you facing any issue on feature that you could
 -linux provided support wiill help on this 
 
 to connect to ---redhat linux----
-***
+
 
 while connec to instance> go to ssh client tab 
 do copy ssh command listed there
@@ -28,10 +28,9 @@ how you will install any application on your mac/os
 for linux we have a store called!!
 
 -rhel, centos.fedora,amazon linux , suse = YUM is the playstore(yellow utilitiy manager)
---
 -debian, ubuntu = apt ()
---
 
+--
 here in this exxample i'm working on redhat so 
 you need to be a root user to instal any application
 
