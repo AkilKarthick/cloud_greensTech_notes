@@ -34,6 +34,7 @@ you need to be a root user to instal any application
 
 -yum update  == this will update default system packages 
 *yum install packagename
++yum
 
 for eg yum install httpd
 here httpd is a webserver, if your applicatio is on local if you wannt to expose that to internet 
