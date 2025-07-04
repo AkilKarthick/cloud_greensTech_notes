@@ -32,6 +32,21 @@ for linux we have a store called!!
 -debian, ubuntu = apt ()
 --
 
+here in this exxample i'm working on redhat so 
+you need to be a root user to instal any application
+
+yum update  == this will update default system packages 
+
+yum install packagename
+
+for eg yum install httpd
+here httpd is a webserver, if your applicatio is on local if you wannt to expose that to internet 
+
+for eg
+
+yum install -y    == this will direclty insatll the required package by considering yes as a reposne fro us
+
+
 
 
 
