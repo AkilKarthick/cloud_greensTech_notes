@@ -41,7 +41,21 @@ here httpd is a webserver, if your applicatio is on local if you wannt to expose
 
 for eg
 
-yum install -y    == this will direclty insatll the required package by considering yes as a reposne fro us
+yum install -y      ==this will direclty insatll the required package
+                      by considering yes as a reposne fro us
+
+yum install -y nginx httpd    == this will install multiple 
+                                application on a single command
+
+yum infor nginx   == information of the nginx will list thier
+
+yum remove nginx  == it will remove the application
+--
+to check the status of ngnix we are asking to system 
+
+systemctl status nginix == 
+
+
 
 
 
