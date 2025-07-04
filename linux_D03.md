@@ -1,4 +1,6 @@
-linux D4
+#linux D4
+##linux D4
+###linux D4
 
 in real time what kind of linux we use?
 --
@@ -22,14 +24,13 @@ give yes for
 it will ask us to enforece your licence by providig activation key / organization / rhc connect
 
 --how to update , package installation and managing--
-how you will install any application on your mac/os
 
-for linux we have a store called!!
+how you will install any application on your mac/os
+forr linux we have a store called!!
 
 -rhel, centos.fedora,amazon linux , suse = YUM is the playstore(yellow utilitiy manager)
 -debian, ubuntu = apt ()
 
---
 here in this exxample i'm working on redhat so 
 you need to be a root user to instal any application
 
