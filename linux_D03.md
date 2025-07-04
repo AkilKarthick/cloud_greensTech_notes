@@ -32,9 +32,8 @@ forr linux we have a store called!!
 here in this exxample i'm working on redhat so 
 you need to be a root user to instal any application
 
-yum update  == this will update default system packages 
-
-yum install packagename
+-yum update  == this will update default system packages 
+*yum install packagename
 
 for eg yum install httpd
 here httpd is a webserver, if your applicatio is on local if you wannt to expose that to internet 
@@ -43,7 +42,7 @@ for eg
 
 yum install -y    == this will direclty insatll the required package by considering yes as a reposne fro us
 
-![https://1drv.ms/i/c/03276c95ce34005e/ER4FpA5slb9FtDX3UriAe50Bhv_gEQUavBMxtcELcZKR5g?e=7WmK2M]
+
 
 
 
