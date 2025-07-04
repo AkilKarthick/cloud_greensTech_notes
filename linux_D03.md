@@ -43,6 +43,8 @@ for eg
 
 yum install -y    == this will direclty insatll the required package by considering yes as a reposne fro us
 
+![https://1drv.ms/i/c/03276c95ce34005e/ER4FpA5slb9FtDX3UriAe50Bhv_gEQUavBMxtcELcZKR5g?e=7WmK2M]
+
 
 
 
