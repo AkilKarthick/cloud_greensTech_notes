@@ -1,6 +1,4 @@
-#linux D4
-##linux D4
-###linux D4
+**linux D4**
 
 in real time what kind of linux we use?
 
