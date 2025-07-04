@@ -3,7 +3,7 @@
 ###linux D4
 
 in real time what kind of linux we use?
---
+
 it depends up on organization budget, some use redhat, some use centos, maybe debian , ubuntu 
 
 -redhat, centos == not a free one (need licence) you can ask like linux is free the why ew need to buy?
