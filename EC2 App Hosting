@@ -141,7 +141,33 @@ if client asked us for 1.5lakshs ip means? how you proceed?
 
 -----------------------------------------------------------------
 
-how vpc works
+how vpc works flow diagram
+
+consider a box
+
+whatever subnets i'm going to create must comes under my VPC range
+subnets like
+
+public subnet
+10.0.1.0/24  - total 256IP alloted for subnets
+
+private subnet
+10.0.2.0/24  - ))
+
+netowrk flow should be there for both the subnets
+
+Internet Gateway- helup us to 
+
+it will take the vpc n/w and via route table provide n/w to subnet
+this is how the default vpc look like below 
+
+myvpc--> igw --> public routetable ----(public security group )---> publicSubnet(public ec2)
+
+natgateway= it will take the n/w from public subnet and provide it to private subnet via route table
+here to we have a private security group
+-----------------------------------------
+
+
 
 
 
