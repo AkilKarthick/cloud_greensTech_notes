@@ -1,0 +1,172 @@
+-------------------------------------------------------------------------
+vpc -> virtual private cloud
+
+how to find valid IP?
+what is IP? a server
+
+how IP is split up is 
+ 8.8.8.8 = total(32 bit)
+
+each digit mazimum size is
+0-255 = 256 total count
+
+CIDR -> Classless inter domain routing
+
+it will calculate the ip count
+
+ipv4 = 32 bit range (we are goinng to see this)
+ipv6 = 128 bit range
+
+--------------------------
+we are going to calculate ? 
+
+out of 32bit  -32(if i plan to use 32 ) = 0 = 2 power of 0 = 1
+32-31 = 1 = 2 power 1 = 2(total number of host/ ie 2 ip)
+32-30 = 2 = 4 
+32-29 = 3 = 8
+32-28 = 4 = 16
+32-27 = 5 = 32
+32-26 = 6 = 64
+32-25 = 7 = 128
+32-24 = 8 = 256 (count of IP's)
+   -23 =9 = 512
+---------------
+
+you can check this on CIDR calculator as well for more clarity!!
+
+for EG: if you give 
+10.0.0.0/24 on CIDR == you notive that 
+        first IP is 10.0.0.0
+        last IP is 10.0.0.255 (here last ip is fill)
+
+10.0.0.0/23 on CIDR == you can see like
+        first IP is 10.0.0.0
+        last Ip is 10.0.1.255 (here once the last digit attain max 255 then it moved to next sessino) 
+
+fourth 255 completed on 24th
+thired 255 completed on 16th
+second 255 completed on 8th
+-----
+
+if client asked us for 1.5lakshs ip means? how you proceed? 
+
+-----------------------------------------------------------------
+
+how vpc works flow diagram
+
+consider a box
+
+whatever subnets i'm going to create must comes under my VPC range
+subnets like
+
+public subnet
+10.0.1.0/24  - total 256IP alloted for subnets
+
+private subnet
+10.0.2.0/24  - ))
+
+netowrk flow should be there for both the subnets
+
+Internet Gateway- helup us to 
+
+it will take the vpc n/w and via route table provide n/w to subnet
+this is how the default vpc look like below 
+
+myvpc--> igw --> public routetable ----(public security group )---> publicSubnet(public ec2)
+
+natgateway= it will take the n/w from public subnet and provide it to private subnet via route table
+here to we have a private security group
+-----------------------------------------
+
+
+open networking and conetne delivery on aws
+select VPC
+on the VPC dashboard
+
+if you go to your VPC , there already one default vpc listed there don't do any thing there
+
+step1: click on create VPC
+        gave name like MY-VPC
+        ipv4 cide as 10.0.0.0/16
+        click on create VPC
+step2: subnets (public & private)
+        click on create subnets
+        select your VPC ID ON create subnets in this vpc
+        give subnet name: PUBSUB
+        ipv4 cidr as 10.0.1.0/24 (we are going to allocate 256 IP's)
+        click on create subnet
+
+        create subnet for private too
+
+click on create subnets
+        select your VPC ID ON create subnets in this vpc
+        give subnet name: PVTSUB
+        ipv4 cidr as 10.0.2.0/24 (we are going to allocate 256 IP's)
+        click on create subnet
+
+next create Internet Gateway::
+        create ig
+        name : MY-IGW         
+        click on create internet gateway. it's state is in DETACHED initially
+        and later we can attach > click on Actions> attach to VPC
+        select your vpc on the Available VPC's box
+        click on attach internet gateway
+
+now need to create Route Table,
+        on the dashboard it shows two route table intially
+        one is default one and other is our VPC's one
+we are not going to use the abve , going to create a new one 
+        create route table
+        name: pubRT
+        select your VPC
+now edit that routetable, click on add route and do select your internet gateway & give
+0.0.0.0 public ip, & do save the changes
+
+now we are going to associate public subnet with public related internet gateway!!
+on subnet assocation > click on edit assocation
+select PUBSUB , and do Save assocations
+
+now going to create route table for private
+name: PVTRT        
+selct your VPC, do create route abel
+initially we don't have nat but we have that subnet association option to associate our subnet first
+associate your pvtsub with pvtrt
+
+security groups::
+create new
+name: PUB-SG
+        Description: PUB-SG
+        select your vpc too
+        need to give inboud rules(yarulaam ulla varalam)
+        inbout rules        type == ssh, rdp, http & https
+        finally create seucity grou;s
+name: PVT-SG
+        Description: PVT-SG
+        here in inboud rules, Type select "Custom TCP" 
+        Source as custom and 
+        select PUB-SG, means we give like
+whom all are comes under pub subgroup only come here on private like that we setuped here
+
+now create instances,
+here imporatny on the network settings
+
+select your VPC on vpc-required
+select pubsub (public subnet )
+auto assigne public ip- enabled
+security group, select public-sG
+do launch instance
+
+for private instacnte
+name: private
+on n/w settings,
+select your vpcc
+you private subnet
+and disbaled the auto assign public ip is disabled
+secity group: pub private SG
+do launh the instance
+
+going to create NAT gateway
+create 
+name :         my-nat
+subnet:    (pubsub)
+do allocate Elastic IP
