@@ -1,4 +1,4 @@
-
+ 
 RDS & DYNAMO
 
 database,
@@ -70,7 +70,7 @@ instance configuration,
 then on Storage
 storage type,
  for Provisioned IOPS itslef we are spending 300dollars, 
- so change it to General purpose SSD
+ so change it to Ge neral purpose SSD
   Allocated Storage is min 20 is fine
 
 now cost changed to 2dollar
@@ -81,9 +81,15 @@ select Don't connect to an EC2 instance
 VPC, select your vpc
 public access> alway select NO
 
+backup> enable autoomated bakcup
+backup retention period > 7 days
+disable> enable deletion protection
 
+finally create database 
 
-
+---mean while create and Ec2 instance---
+select all tcp on common security group
+    why because to connect secerutiy group 22port, 3360 port too
 
 hit---
 i put my database(RDS) not on single AZ i put on multiple AZ, for login purpose
@@ -102,6 +108,70 @@ RDS - prvide one endpoint url , we create username & password
 application- datea logsi prsen here including queryeis
 
 -------
+
+now on created ubuntu what we need to do is?
+
+
+sudo apt update
+sudo apt install mysql-server -y
+mysql 
+musql -v
+sudo -i
+musql -v
+sql> now we got into mysql
+ we are just configured myusql on our local machine  using the above command
+
+=============
+
+now how to connect created database to our ec2 instacne
+open that created db> on connectivity & security tab> you can see the endpoint url
+--------
+mysql -h database-1.cz2aimoogxp.ap-south-1.rds.amaonaws.com -P 3306 -u admin -p
+password: admin123
+----------------- we able to see sql version of what we give on RDS while creating
+we are connectiong databse to our ec2 instance using endpoint,
+
+show databases;
+
+if you want to increse  capacity, go to modify> downtime happend
+if you want to avoid downtime> go to action> create read replica >
+convert to multi AZ- deploument first to - create read replica
+
+finally delete the databaseinstance (delet me)
+also delete the subnet group too
+terminate the EC2 instance as well
+--------------------------
+
+Dynamo DB,
+
+managed no sql databse
+
+we pay as per read & write operation not like mysql their it will show bill right
+
+create table
+name:  students
+parition key: sid  number datatype select on dropdown
+sort key-optional : name | string
+
+no customized 
+ you got 
+ondemand  (automatic a varum) - simplfiyh billing by pay for the actila read and write your appcation perfomance
+provisioned (neenga customized panrathu read/write) - manage and optimize your cost by allocation read/write capacity in advance
+
+
+finallly create item
+we can add attribute as per oour need on the table
+
+you can add data via console or else aws sdk , amazon lambda via application you can code
+
+
+
+
+
+
+
+
+
 
 
 
