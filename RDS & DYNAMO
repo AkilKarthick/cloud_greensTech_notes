@@ -1,0 +1,15 @@
+
+RDS & DYNAMO
+
+database,
+ types of date::
+structured      = infomration only we can put inside (for eg: EXCEL )   -- RDS used here
+semi-structured = both way we can store data  --  no sql : dynamoDB
+un structed     = video, audio , pdf, etc (we store in S3, EBS, EFS )
+
+EXCEL we have rows & colums
+
+--------
+
+RDS
+                                                      
