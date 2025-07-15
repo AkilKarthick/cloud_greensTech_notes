@@ -31,6 +31,59 @@ description: db-sub
 vpc: select you vpc 
 availaibity zone: availibilty zone select or chose AZ
 subnets: select subnet included on the AZ
+click on CREATE database
+ 1.choose a DATABASE creation method
+standard create
+Easy create
+2.Select Engine oPTIONs /engine type
+  Mysql or postgreSQL
+Aurora(Mysql compatabile) - aws managed SQL, 5times faster then mysql
+Select Engine Version, for EG: Mysql 8.0.41
+then
+Templates, choose either
+prodcuion 
+or Dev/Test
+or free tier
+
+then 
+Availability & durability, select deployment option
+   Mutli AZ db cluster deployment (3 instance)
+   mutli AAZ instance Deployment (2 INSTANCE)
+   single AZ db insance deployment (1 instance)   = select this one
+
+then
+Settings
+ DB instane identifier- means name 
+then 
+Credentials Setting
+ Master Username: admin
+select > Self Managed(create your own password or have RDS create a pwd that you manage)
+Master password:   admin123
+confim password:   admin123
+
+then 
+instance configuration,
+    standard clasee - min 8gb
+    memory optijmzed class - min 16gb
+    burstable class - 1gb   cost you 18dollars
+
+then on Storage
+storage type,
+ for Provisioned IOPS itslef we are spending 300dollars, 
+ so change it to General purpose SSD
+  Allocated Storage is min 20 is fine
+
+now cost changed to 2dollar
+
+then , on Connectivity
+select Don't connect to an EC2 instance
+
+VPC, select your vpc
+public access> alway select NO
+
+
+
+
 
 hit---
 i put my database(RDS) not on single AZ i put on multiple AZ, for login purpose
@@ -41,6 +94,17 @@ if i connecftefd these below RDS together means - cluster-
       RDS - replica
 
 cluster- more instance connected together means cluster
+
+master  - write
+replica - read 
+-------
+RDS - prvide one endpoint url , we create username & password
+application- datea logsi prsen here including queryeis
+
+-------
+
+
+
 
 
 
