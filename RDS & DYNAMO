@@ -12,4 +12,36 @@ EXCEL we have rows & colums
 --------
 
 RDS
+ we are going to create RDS 
+login to AWS account,
+seasearch for Aurora and RDS,
+
+hint--
+
+on vpc concept, we put database and backe on private subnet &
+                fronet end on public subnet
+if we want to more secure , we can put front end on private and load balancer on public then we expose
+based up on organiztion and devops enginner convinent
+------------
+
+now if you need to create RDS you need -subnet groups- first
+create a subnet for RDS
+name:db-sub
+description: db-sub
+vpc: select you vpc 
+availaibity zone: availibilty zone select or chose AZ
+subnets: select subnet included on the AZ
+
+hit---
+i put my database(RDS) not on single AZ i put on multiple AZ, for login purpose
+consider like if  take backup means it's not a cluster it is an unique instance only
+if i connecftefd these below RDS together means - cluster- 
+      RDS - replica
+      RDS - master
+      RDS - replica
+
+cluster- more instance connected together means cluster
+
+
+
                                                       
