@@ -164,6 +164,11 @@ we can add attribute as per oour need on the table
 
 you can add data via console or else aws sdk , amazon lambda via application you can code
 
+when to use RDS & dynamo
+
+RDS - for long time record, for best pratice, rds has limited no of request , as per instance capaticy
+dynamo- for temporary & fast, it can accept millions of records 
+
 
 
 
