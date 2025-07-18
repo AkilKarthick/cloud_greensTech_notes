@@ -83,6 +83,63 @@ network mapping:
   listener and routing: http 80 and http 80
   ---create loadbalancer
 
+so far we created 
+  load balancer
+  template
+we didn't created EC2 instance right
+
+using autoscaling we connect, 
+  we give lb and template to autoscaling so that it can connect.
+
+Auto sclaing group--------
+
+name: ASG
+template : my-LT select your
+next
+subnet selct all
+balanced best effort AZ
+next
+loadbalancer- attach to an existing lb  (classic loadbalancer)
+for 
+application,network & gateway loadbalancer- we use target group to connect the load balancer
+next
+configure group size & scaling -
+ groupsiz
+desired capacity- specifigy your group size -2
+
+scaling-
+ min= 2 max desired capacity =4
+ next
+do create Auto scaling group
+
+now instance get created, by use autoscaling group + lb connected too
+you can hit using 
+  IP & loadbalancer DNS --- to view
+
+----
+
+now check go to the instance
+two got created 
+
+hit using public IP > this is my class ilb isntanve and host name pring onthe browser
+check with another IP
+
+now check with loadbalancer DNS name: you get the same ui 
+
+
+this is my classic LB instance ip-172-31-3-182.ec2.internal
+this is my classic LB instance ip-172-83-3-200.ec2.internal
+
+above UI mari mari loadbalancer  piruchu kudukum, 
+
+how can we check autoscal working we give minin 2 right!!
+
+if you terminate one instance--> 
+
+next 
+
+Application Load Balancer ?? pending!!! with 
+
 
 
 
