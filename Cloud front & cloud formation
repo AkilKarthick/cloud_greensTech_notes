@@ -1,1 +1,56 @@
 Cloud front & cloud formation
+
+1.cloud front = 
+  cdn tool
+  content delivery network tool
+  for eg, to make the appliction to reach the user soon
+  latency based up on application
+
+Edge location = 
+cache servers = temporary server 
+
+for EG, we have 2 dataceter(orginal server's) in india, so 6 
+      chennai , kolkata ,(edgelocation[cache server's])
+      like that we placed some edge location on small places
+
+
+
+2.cloud formation
+
+
+-------for demo
+
+to use cloud front , i need a source i make it as S3
+1.create a cloud front distribution
+  distribution name: new-cf
+  single website or app   > next
+
+specify orgin,
+  orgin type: amazon s3 ,,you can select elb,vpc etc
+        create a s3 on the same time
+          create bucket> general purpose> name > acl enabled> enable> make it as public
+          put any file there
+        you get the object URL (on northen virgina)
+        
+        if i try to acess this on india we may feel some latency
+--
+2.now ,
+
+select your bcuket on s3 by browse
+orgin path-optional
+
+3. Web Application Firewall (WAF)
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
