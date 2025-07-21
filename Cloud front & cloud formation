@@ -39,7 +39,61 @@ specify orgin,
 select your bcuket on s3 by browse
 orgin path-optional
 
+ENABLE SECURITY!!!!
 3. Web Application Firewall (WAF)
+  if you want enable it/ no need
+4. do create distriubution
+
+you will get a new distribution domain name url
+  eg: d329mkdjfasdf.cloudfront.net like this
+
+hit this url like belwo
+
+http://d329mkdjfasdf.cloudfront.net/cars/jpg  = not rachable
+
+it will take some time to deploy,,
+
+https://d329mkdjfasdf.cloudfront.net/cars/jpg = this will work
+
+you hace crated this on multiple regions, so by default it will be in allow all region
+we can restrict that by go to the 
+cloud front geographic restrictions,
+
+delete that s3 data objcet now, we have delete that src bucekt now
+now even src bucket is deleted , but we able to hit this url 
+https://d329mkdjfasdf.cloudfront.net/cars/jpg = this will work , cache server wil work
+
+we can restrict edit countries> if you block india means
+it will not work shoe block access from your country!!!
+
+
+kindly do check that invaliation creation part!!!!!!!!!!!!!!!!!!!!!
+
+Invalidating the CloudFront cache is essential when you need to remove
+outdated content from CloudFront edge caches before it expires. 
+This ensures that users receive the most up-to-date content from your origin servers.
+
+----------------
+
+we cann't able to delete the cloud front distribtion , we can diable that it will took some time
+to terminate that
+=========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
