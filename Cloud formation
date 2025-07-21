@@ -1,0 +1,43 @@
+Cloud formation!!!!!!
+
+open that cloud formation
+you can create a stack!! here
+ 1.choose an existing template or build from infrastructer composer
+2.specfy template,
+    choose amazon s3 URL,
+    uploda template file = gave a json
+    or choose from git hut sync =
+3. choose infrastructe composer.
+    we hace canvas/template yam or json
+do select resource on the left side  like ec2 or rds or etc
+
+  just do drag and drop on the canvas tab
+  you get this below,
+
+            Resource:
+              instance:
+                Type: AWS: EC2::instance
+                Properties: ()  //you need to give resources on thie properties 
+
+search for simple json script for ec2 intance, on gooogle
+you need to give this syntax, entity in your AWS cloud formation template 
+
+            Resource:
+              instance:
+                  Type: AWS: EC2::instance
+                  Properties: 
+                      AvailibitlyZone: ap-south-la  //add you regions
+                      ImageId: ami-0sadfnkasdnfk // do add you ami
+                      InstanceTpe: t2.micro  
+do specify stack details
+stack name: my cfcf
+permission -optional
+  no need to give this IAM role gave like cloudformation-admin-role
+finally do submit 
+
+it will through error, we need to give a correct AMI-ID as per our region
+
+instance got created bu using the cloud front,
+do check on the EC2 instance dashboard,
+check the tag name
+key as cloud front as key
