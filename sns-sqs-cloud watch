@@ -1,1 +1,65 @@
 sns-sqs-cloud watch
+
+  SQS - simple queue service
+  
+  SNS - simple notification servive
+  
+  CW - cloud watch - monitoring tool - metrices/log -> alert set pananum
+------------------
+communication type
+synchorious - sqs  - 1 to 1  (internally within aws)
+asynchronous -sns  - 1 to many (protocols -mail/sms/website)
+-------------------
+
+sqs
+
+  sender -> quere -> receiver
+  here
+  both the sender and receiver need to be acitive then only the communcaiton can happend
+  dead letter queue - 
+--------
+SNS
+
+  publisher - topic -subscriber1,2,3,...(multiple receiver)
+  eg whatsapp group,
+here receiveer acttice is no needed 
+
+om AWS this comes under Application integeration
+SQS: 
+    create queue
+    fifo, msg ordering is preserced
+    do select standard- random/msg order isn;t preserved.
+  
+  name: My-SQS
+  configuration: visibility timeout, 
+                  msg retention period(h0w long day it prsent ther )
+                , delivery delay
+                maz msg size
+  encryption: disabled
+  Access policy: who can send & who can receive
+  Dead letter queue - send undeliverable msg to a dead letter queue
+  do create queue
+  
+  go to send and receive message
+  msg body: this is my first sqs msg
+  hit send mesage
+    you can see the received msg ID
+  you can seee the body
+
+
+  
+
+
+
+
+
+
+    
+
+
+  
+
+
+
+
+
