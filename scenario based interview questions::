@@ -1,1 +1,31 @@
 scenario based interview questions::
+
+1.An EC2 instance is unreachable — how would you troubleshoot?
+
+🔸 Check Security Group (port 22 for SSH),
+🔸 Check if instance is running or in stopped state,
+🔸 Look at system logs via AWS Console
+🔸 Use EC2 serial console if no SSH access
+🔸 Check Network ACLs, Subnet route tables
+
+2.our EC2 instance is slow. How do you analyze performance?
+
+🔸 Use top, htop, iotop, df -h, du -sh *
+🔸 Look at CloudWatch metrics (CPU, memory, disk IO)
+🔸 Check EBS performance
+🔸 Check background processes or zombie processes
+
+Linux Basic Scenarios
+15. Disk is full on EC2. What steps will you take?
+
+🔸 df -h to check usage
+🔸 du -sh * in /var/log, /tmp, /home
+🔸 Clean logs, rotate if needed
+🔸 Consider increasing volume size
+🔸 Delete unused Docker images or temp files
+
+16. EC2 has high CPU. How to analyze?
+
+🔸 top, ps aux --sort=-%cpu, htop
+🔸 Look for stuck processes or runaway apps
+🔸 Check log rotation (logs flooding disk)
