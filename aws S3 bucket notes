@@ -136,10 +136,127 @@ so that gave that access point to different persons dev,tester,etc
 
 
 ================
-lex content
+interview questions,
 
-amazon s3 is an object stroage service that offers industory leading scalability,
-data availability, security and performance
+Absolutely! For **3.5 years of experience in AWS with a focus on S3 (Simple Storage Service)**, you can expect **scenario-based questions** that go beyond basic bucket creation. Below are **practical, real-time S3 questions** typically asked in mid-level cloud/DevOps interviews:
+
+---
+
+### ✅ **Scenario-Based S3 Interview Questions for 3.5 YOE**
+
+---
+
+#### **1. You uploaded a file to an S3 bucket but are getting 403 Access Denied when trying to download it. What will you check?**
+
+**Expected Answer:**
+
+* Check if the object exists.
+* Verify bucket and object **permissions (ACLs)**.
+* Check the **bucket policy** for public/private access rules.
+* Confirm the **IAM role/policy** of the user has `s3:GetObject`.
+* If using **VPC endpoint**, check policy restrictions.
+
+---
+
+#### **2. How would you make an S3 bucket publicly readable for a website?**
+
+**Expected Answer:**
+
+* Add a bucket **policy** that allows `"Effect": "Allow", "Principal": "*", "Action": "s3:GetObject"` on `arn:aws:s3:::your-bucket/*`
+* Enable **Static Website Hosting** in bucket properties.
+* Ensure all objects are **public**, or use CloudFront for controlled access.
+
+---
+
+#### **3. Your application needs to trigger a Lambda function whenever a file is uploaded to S3. How would you implement this?**
+
+**Expected Answer:**
+
+* Configure **S3 event notification** for `s3:ObjectCreated:*`.
+* Set the destination to a **Lambda function ARN**.
+* Ensure Lambda has `s3:Read` permissions.
+* Use filter rules if required (e.g., `.jpg` only).
+
+---
+
+#### **4. How would you securely share an S3 file with an external user for 24 hours only?**
+
+**Expected Answer:**
+
+* Generate a **pre-signed URL** with a 24-hour expiry.
+* Use AWS CLI or SDK (`generate_presigned_url()`).
+* Ensure the IAM role/user generating it has `s3:GetObject`.
+
+---
+
+#### **5. How do you implement version control in S3 and what are its benefits?**
+
+**Expected Answer:**
+
+* Enable **Versioning** on the bucket.
+* Each object has unique version ID.
+* Prevents **accidental overwrites/deletion**.
+* Enables **rollbacks** to previous versions.
+
+---
+
+#### **6. A user accidentally deleted important files from S3. Can you recover them?**
+
+**Expected Answer:**
+
+* If **Versioning** is enabled → restore from previous versions.
+* If **Object Lock (WORM)** was enabled → undeletable during retention period.
+* If **not versioned** and no backup → recovery not possible.
+
+---
+
+#### **7. You want to automatically delete files older than 30 days from a bucket. What would you do?**
+
+**Expected Answer:**
+
+* Set up **Lifecycle Policy**:
+
+  * Action: Expire object
+  * Condition: Object age > 30 days
+* Optionally, move to **Glacier** or **Intelligent-Tiering** first to save cost.
+
+---
+
+#### **8. What’s the difference between S3 Standard, S3 Infrequent Access, and Glacier? When do you use each?**
+
+**Expected Answer:**
+
+* **Standard**: For frequently accessed data
+* **IA**: Accessed less frequently (monthly); cheaper storage, higher access cost
+* **Glacier**: Archival, long-term storage; high latency (minutes to hours)
+* Use Lifecycle rules to automate transitions.
+
+---
+
+#### **9. You want only a certain IP range (your office) to access your S3 bucket. How do you restrict it?**
+
+**Expected Answer:**
+
+* Apply a **bucket policy** with `"Condition": { "IpAddress": { "aws:SourceIp": "x.x.x.x/24" } }`
+* Deny all other access using explicit `"Deny"` rules.
+
+---
+
+#### **10. A user is uploading large files to S3 and it fails midway. How can you make the upload more reliable?**
+
+**Expected Answer:**
+
+* Use **Multipart Upload**:
+
+  * Splits large file into parts and uploads in parallel.
+  * More reliable, especially for network errors.
+  * Resume only failed parts.
+* Use AWS SDK or CLI `s3api create-multipart-upload`.
+
+---
+
+Would you like these in **Excel format** to track your daily practice progress or self-testing?
+
 
 
 
