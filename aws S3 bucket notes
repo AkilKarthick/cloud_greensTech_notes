@@ -82,11 +82,57 @@ after uploading an file
 we need to select 
 storage class on properties file
 
-standard              - frequenty accessed data morethan once a month wih millisecond acccess
-intellignet tiering   -
+standard              - adikari use panura data \ frequenty accessed data morethan once a month wih millisecond acccess
+intellignet tiering   - 
 one zone IA
 glacier instant retreievla
 glacier flexible
+
+
+finally try to delete that budet
+permanently delet the object
+
+now go to bucket> go to properties> enable bucket version > SAVE changes
+
+now try to delet the file> you may get delete object type instead of permenantly delete
+
+we have several option to do with our object
+go to properties on object
+1.encruption  = using key
+2. Inteligent tiering archieve configuration = 
+                we can create a poilicy like after 30 days it move to standerd..
+
+3.server access logging = use cloud watch, to check bucket access log to check health of log
+4.cloud trail data event = to check  acces log of object level
+
+5. Event Notification = sen a nofiti when specific event occuer on you bucket
+6. Transfer Accelerarion - for fast transfer
+        what is the differenc between 
+        ssd - input output file transfer speed 
+        hardwar - some bit slow
+7. object lock - write once read many (worm) only one time we can edit and many time read
+8. Requestor Pay -  pay to see my bucket like anonymouse access to the bucket is disabledd
+
+permission
+
+1.buket policy =  for eg specifically you need to privide access s3 but this bucket access revoking
+        to give speicific bucket acees 
+2. metrices
+        total bucket size
+        total nmber of objects
+
+Management:
+1. lifecycle configuation = to set an object lifyclye
+2. replication rule - to copy the same bucket on some other area like duplicate or replica
+
+Access point::
+for eg this is my bucket name : 29-07-2025akil
+but i gave access point name like below,
+29-07-2025akil-1  - i can give this to one user
+29-07-2025akil-2  - to another user
+29-07-2025akil-3- ..
+
+so that gave that access point to different persons dev,tester,etc
 
 
 ================
