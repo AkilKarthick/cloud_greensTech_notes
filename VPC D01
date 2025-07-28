@@ -1,5 +1,8 @@
+what ever ec2 you launch which contains 
+default internet gateway, default route table, default subnet, default VPC!!!
+
 -------------------------------------------------------------------------
-vpc -> virtual private cloud
+vpc -> virtual private cloud | isolated cloud resourece
 
 how to find valid IP?
 what is IP? a server
