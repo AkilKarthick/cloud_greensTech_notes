@@ -1,0 +1,127 @@
+Great! Here's a set of **scenario-based AWS EBS (Elastic Block Store)** and **Snapshot** interview questions tailored for someone with **3–4 years of experience** in cloud/DevOps.
+
+---
+
+### ✅ **EBS & Snapshot — Scenario-Based Interview Questions (AWS Mid-Level)**
+
+---
+
+#### 🔹 **1. An EC2 instance becomes unresponsive, and you suspect it's due to EBS volume issues. How do you troubleshoot?**
+
+**Expected Answer:**
+
+* Stop the EC2 instance.
+* Detach the root EBS volume.
+* Attach it to another healthy EC2 instance as a secondary volume.
+* Mount and inspect logs/data (`/var/log/messages`, `/var/log/syslog`).
+* Fix issues (e.g., corrupt file system).
+* Reattach volume to original instance and restart.
+
+---
+
+#### 🔹 **2. How do you back up an EBS volume without downtime?**
+
+**Expected Answer:**
+
+* Use **EBS Snapshot** (manual or automated).
+* Snapshots are **incremental** and taken while the instance is running.
+* For consistent backup of databases:
+
+  * Either **freeze I/O** or use **application-level quiescing**.
+
+---
+
+#### 🔹 **3. What happens to the data when you terminate an EC2 instance with an attached EBS volume?**
+
+**Expected Answer:**
+
+* If **DeleteOnTermination = true** (default for root volume), the volume is deleted.
+* For data volumes, set `DeleteOnTermination = false` to retain them.
+* You can check or modify this setting using CLI or Console.
+
+---
+
+#### 🔹 **4. How can you restore a failed EC2 instance from its latest backup?**
+
+**Expected Answer:**
+
+* Identify the most recent **snapshot**.
+* Create a new **volume** from the snapshot.
+* Launch a new EC2 instance or attach the volume as root/data volume.
+* (If boot volume) Ensure OS and boot files are intact.
+
+---
+
+#### 🔹 **5. How are EBS snapshots stored, and how do you optimize cost?**
+
+**Expected Answer:**
+
+* Stored in **Amazon S3** internally (not visible directly).
+* **Incremental**: Only changes since the last snapshot are saved.
+* Use **Lifecycle Policies** (via Data Lifecycle Manager) to:
+
+  * Retain X days of snapshots.
+  * Automatically delete old ones.
+
+---
+
+#### 🔹 **6. Can you share an EBS snapshot across accounts? How?**
+
+**Expected Answer:**
+
+* Yes:
+
+  * Set **snapshot permissions** to make it shared (read-only).
+  * Use the **snapshot ID** in target account to create a new volume.
+* For encrypted snapshots:
+
+  * Use **KMS key sharing** as well.
+
+---
+
+#### 🔹 **7. You need to create 10 EC2 instances with the same baseline data. How do you ensure consistent EBS volumes?**
+
+**Expected Answer:**
+
+* Create a **golden EBS snapshot** with all the necessary data/apps.
+* Launch EC2 instances with volumes created from that snapshot.
+* Automate this using **Launch Templates** or **CloudFormation**.
+
+---
+
+#### 🔹 **8. How do you automate daily EBS backups?**
+
+**Expected Answer:**
+
+* Use **Amazon Data Lifecycle Manager (DLM)**.
+
+  * Define backup frequency (e.g., every 12/24 hrs).
+  * Set retention policy.
+* Tags on EC2 volumes can be used to apply policies.
+
+---
+
+#### 🔹 **9. Your application is experiencing slow I/O performance on EBS. What would you check?**
+
+**Expected Answer:**
+
+* Check volume type (gp2/gp3/io1).
+* Use **CloudWatch metrics**: `VolumeReadOps`, `VolumeWriteOps`, `VolumeQueueLength`.
+* Consider upgrading:
+
+  * gp2 → gp3 (cost-effective, provisioned IOPS)
+  * io1/io2 for high-performance workloads
+* Use RAID 0 if combining volumes.
+
+---
+
+#### 🔹 **10. You accidentally deleted an EBS volume. Can you recover it?**
+
+**Expected Answer:**
+
+* **No** if no snapshot exists.
+* **Yes** if snapshot exists — create a volume from the snapshot and reattach it to an instance.
+
+---
+
+Would you like these EBS/Snapshot questions added to your Excel tracker too? I can update and send you the latest version.
