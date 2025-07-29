@@ -49,14 +49,18 @@ using
     name: PVT-EC2-A
     select you vpc-A & subnt: PVT-SUBNET-A
       and now 
-    put the copied secrity group of PUB-EC2-A ,
-    on INBOUND security group rules,
+    put the copied secrity group of PUB-EC2-A , on PVT-EC2-A on INBOUND security group rules,
     source type: custom
     source: do copy that sg-2394u3284s
 which mean i tell to this what ever comes from that will accept here too
-      
-    
+
+here on linux how we are going to jump from  public machine to pvt machin 
+we should have private key of pvt-ec2-a to jump from public to private
+only PEM file should be wwith us, we coulde able to copy ppk file
   
-  
-  
+pem - windows
+putty private key ppk - linux
+
+open putty gen
+to convert ppk to pem
 
