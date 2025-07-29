@@ -5,6 +5,7 @@ going to create two VPC-----------
 NAME:VPC-A
 IPV4 CIDR: 10.0.0.0/16
 
+
 2.create two SUBNETS-------------
 
 select your vpc name
@@ -63,4 +64,94 @@ putty private key ppk - linux
 
 open putty gen
 to convert ppk to pem
+
+now launch instance> public one
+
+sudo -i 
+vi mypvtkey.pem
+  copy and pset that key PEM FORMAT
+change permission 
+    chmod 400 mypvtkey.pem
+
+now 
+
+ssh -i mypvtkey.pem ec2-user@10.0.2.159
+you were able to login FROM PUBLIC MACHIE  to pvt INTANCE
+
+for internet access > we need nat gateway
+
+----------------------
+
+vpc-peering
+
+connecting two different VPC, among different regino or same region or same acoount or diff as well
+
+for eg, 
+now going to create another VPC VPC-B with only one subnet PVT-SUB-B & PVT-RT_B route table
+and going to access VPC-A's pvt to VPC B's pvt subnet 
+
+now create another VPC
+  name: vpc-b
+  20.0.0.0/16
+
+2.subnte
+  select vpc-b
+  pvt-subnte-B
+  20.0.2.0/24  
+do creaet subnet
+
+3. route table
+  pvt-rt-B
+  vpc-b
+create route table
+subnet assocatioon- save it 
+
+do lanch one ec2 instnace for vpc-b 
+
+now need to establish VPC peering between two VPC's private subnets
+
+go to VPC peering> create
+name ; MY-Peering
+REquestor: VPC-A , just give reion and account infor 
+vpc id Acceptor: VPC-B
+
+create peering connection.
+
+vpc-a
+pvt-sub-a : 10.0.2.0/24
+
+vpc-b
+pvt-sbu-a : 20.0.2.0/24   
+
+need to give vice versa for both the pvt subnet on route table to establis two subnet connection
+i can't direclty connect two subnet from different VPC so that VPC peering we did first 
+
+now go to route table
+pvt-rt-a of vpc-a 
+> edit route > add route> add 20.0.2.0/24 & targer as peering connection
+
+PVT-rt-b
+add route> add 10.0.2.0/24 & targer as peering connection> my peering
+
+successlfully establish connection between two subnet pvt connection
+
+--------------
+TRANSIT GATEWAY
+
+consider i have 5 VPC's, how can we connect each VPC among themslef
+i need to do 4 peering to connect each other's right!!. 
+more than two VPC communcation mean we have a concept called -Transit Gateway-
+face some latency feel with this transit gateway method
+
+need to create 
+tranist gateway attachment
+for each VPC and connect to transit gateway. a big process so don't have handonn videso on this 
+
+
+
+
+
+
+
+
 
