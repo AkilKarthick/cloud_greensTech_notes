@@ -1,0 +1,62 @@
+vpc peering--
+
+going to create two VPC-----------
+
+NAME:VPC-A
+IPV4 CIDR: 10.0.0.0/16
+
+2.create two SUBNETS-------------
+
+select your vpc name
+subnt name: PUB-SUB-A
+10.0.1.0/24
+
+subntename: PVT-SUB-A
+10.0.2.0/24
+
+3.create RouteTable-------------
+
+name: PUB-RT-A
+vpc: VPC-A (select yours)
+subnet Association : edit > publicsubnet yours PUB-SUB-A> save
+
+name: PVT-RT-A
+vpc: VPC-A
+subnetnet Association: edit > add PVT-SUB-A > SAVE
+
+4.create INTERNET GATEWAY---------
+
+name; MY-IGW 
+CREATE IT
+now Attach to VPC > VPC-A(our vpc dont have internet gateway right so that is shown onthe drop box)
+
+go to route table> going to route MY-IGW with PUB-RT-A
+edit route > add route > select 0.0.0.0/0 , and target: select your IGW
+
+  now create public and pricate instance
+using 
+  amazon linux
+
+  name: PUB-EC2
+  AMI: AMAZON LINUX
+  select your, VPC-A & subnet: PUB-SUBNET-A 
+  and do Enable -Auto Assigne public IP
+  gave security group as create and 
+    do laucnh your instance
+  now on the dashboard do copy the security group of the PUB-EC2-A instance 
+    and going to create another intance
+
+    name: PVT-EC2-A
+    select you vpc-A & subnt: PVT-SUBNET-A
+      and now 
+    put the copied secrity group of PUB-EC2-A ,
+    on INBOUND security group rules,
+    source type: custom
+    source: do copy that sg-2394u3284s
+which mean i tell to this what ever comes from that will accept here too
+      
+    
+  
+  
+  
+
