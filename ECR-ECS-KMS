@@ -1,1 +1,28 @@
 ECR-ECS-KMS
+
+
+step 1: do launch EC2 instance
+  name: DOCKER
+  amazon linxu AMI 2023
+  t3.cmiro
+  network seeting: ALL TCP
+do launch instance
+
+now do install DOCKER on the EC2 instance
+
+sudo yum update -y
+sudo amazon-linux-extras intall docker -y  not working
+            sudo yum install docker -y 
+sudo service docker start
+sudo systemctl enable docker
+sudo docker info
+sudo usermod -a -G docker ec2-user
+
+by default you are not allowded to use docker as a non root user
+only via root user you allowded to use
+
+so execute this command,
+sudo usermod -a -G docker ec2-user
+
+
+
