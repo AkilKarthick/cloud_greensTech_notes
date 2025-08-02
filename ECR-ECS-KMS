@@ -24,5 +24,29 @@ only via root user you allowded to use
 so execute this command,
 sudo usermod -a -G docker ec2-user
 
+> docker ps 
+    = this will show the running container.
+
+if you couldn't able to see the container means
+do this
+
+sudo chmod 777 /var/run/docker.sock  this is the docker engine 
+change the perimssion of this 
+
+if you hit 
+docker ps > means it will run as non root user itslef
+
+you got 
+containerID | image | command | created | status | port | names
+-----------------------
+
+now on putty
+
+ls 
+vi dockerfile  - to provide docker file instructions
+  created a docker file for application and apache installation
+
+
+
 
 
