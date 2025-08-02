@@ -46,6 +46,42 @@ ls
 vi dockerfile  - to provide docker file instructions
   created a docker file for application and apache installation
 
+#installing Apache
+
+#configure Apache
+EXPOSE 80
+atlast my container is running on 80 port so to expose this i gave the above
+
+
+now, going to build this doker file to image, a template
+you can't able to run this file as a container, you need to build image first then onl 
+
+3.build docker image
+  build tag and name & . represent the current directory
+> docker build =t multicontainer .
+
+now image is getting build
+
+> docker images
+          repository |  tag | imageID |  created |  size
+          multiconatiner | latest | asdsa2314 | 13 second ago | 205mb
+
+this have on ubuntu, middleware & applicaito consit of 205mb
+
+5.run the docker container using image
+  > docker run -itd -p 8080:80 multicontainer
+
+run input terminal mode detached port 
+
+for eg: docker run -itd -p 8081:80 multicontaine - this means another applicaito runnig on this port
+
+now copy your EC2 instance public ip 
+13.235.67.102/8080
+you got your application output
+
+so you can run any number of appication with in this EC2 inside
+
+
 
 
 
