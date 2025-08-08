@@ -1,0 +1,25 @@
+IAM
+identiy access management
+
+authentication - id alloted member can enter office
+autorization - even id cardmemeeber can enter and have certian roles and permission
+
+authentication
+  user  - user defince panurtathu
+  groups  - group of users
+  roles -  we can give privilege to senior resource for temporary purpose
+            client visit during we give temporary password/visitory ID
+
+autorization
+  policiyes  - DO AND don'ts permssions
+
+AWS resources (ec2 instance is the resouce)
+we can acess/modify/manage recouse via,  console management (GUI) , CLI,
+
+how application work
+
+client server conect via API is SDK software developmement kit
+
+------------------------------------------------------
+
+1. open IAM
