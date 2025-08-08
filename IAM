@@ -21,5 +21,17 @@ how application work
 client server conect via API is SDK software developmement kit
 
 ------------------------------------------------------
+1. open IAM >IAM dashboard
+2.create user
+  name: ram
+provide euser access to aws management console -optoinal    
+              hint; on real time they only give iam user not root acount only billing 
+                    EVEN admin has root 
+                        for security breach 
+i want to create an iam user
+3.set permission
+4.give custom password: Admin123
 
-1. open IAM
+
+3.
+
