@@ -29,9 +29,135 @@ provide euser access to aws management console -optoinal
                     EVEN admin has root 
                         for security breach 
 i want to create an iam user
-3.set permission
+
 4.give custom password: Admin123
 
+3.set permission
+  gave permission option
+  attach policy directly > policy can be *aws managed or *custom manaaged
+i give IAM read only acccess for EG
 
-3.
+5.create user
+
+finally, we get
+
+console sign in details,
+  console sigin url |  eg: https://accountdetailnumber.sigin.aws.amazon.com/console
+  user name: ram | 
+  password: Admin123 | we can download this as CSV
+
+https://accountdetailnumber.sigin.aws.amazon.com/console
+  this is not secure, 
+so go to dashboard > go to AWS Account Alias> create like: sample-test
+
+now accountid got changed to 
+https://sample-test.sigin.aws.amazon.com/console
+
+open incognito browser to login as IAM user signin
+
+hint: in realtime they give IAM account only
+for billing: : root account> proof biling
+
+so you only authozised to read IAM onlyyy user, RAM
+
+now goint to create another user siva
+and gave cli access and not management console access
+    username:siva
+    no permission
+you may endup with ACCESS DENIED to IAM:createUser
+
+now goint to create a group :DEV
+add ram over there
+
+policies: IAM full access
+
+permission:
+wihtin a group you can add max 10 policies
+click on user> it shows ram
+
+fro eg: dev team i gave required preiveldge
+
+go to ram user > summary  you can able to see ACCESS KEY 1> means ram doesn't have CLI ACCESS 
+you can enable that by go to Secrity credentials- enable there
+you can create two at t time for a user that is used on CLI
+
+CLI password is the access key
+
+AWS CLI install
+then 
+
+aws --version
+rm .aws  
+ls -a| .aws  
+
+first setp 
+
+
+aws s3 ls  > you get unable to locate credentials. you can configure credentials by runung "AWS configure".
+>ls -a > to find .aws file
+>aws configure
+it wil ask access key if 
+aws access key id: myaccesskey
+aws secret access key : mysecret
+default output format : json
+default region name: ap-south-1
+
+now it you run this command
+aws s3 ls > you get invalid access key  not present on the record
+ls -a| grep .aws
+.aws file got created
+
+to configure multple user 
+
+aws configure --profile siva
+it ask fresh if! see below
+aws access id:
+aws secrete id;
+default regionname:
+output: json
+
+now go to the console and create access key for siva>
+copy that and put if on the above
+
+asw s3 ls > you get error like invalid access key bcz you first create a dummy
+aws s3 ls --profile siva 
+
+no ging to give direct permission to siva > like create inline policies> 
+
+inline policy means giveing specific permission to user,group and roles
+we can't share among us, once delete the use it may disapper
+
+------------
+
+how to create policy::
+
+create policy> select a service (EC2)
+you can give action all or specifice action
+
+you can add user ARN, it will come
+
+we need to know json or Yaml format <
+
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
