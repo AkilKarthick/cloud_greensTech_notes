@@ -82,6 +82,128 @@ you got your application output
 so you can run any number of appication with in this EC2 inside
 
 
+=======================
+10-08-2025
+
+pratical handshonnnnn
+
+
+1. Create one EC2 instance - named docker and installing DOCKER using the below command
+
+
+#! /bin/bash
+sudo yum update -y      = to update the machine 
+sudo amazon-linux-extras install docker   = command not found they revoked this on newer version
+				so use  
+sudo yum install docker -y
+sudo service docker start   = to start by default it is in root user
+sudo systemctl enable docker
+sudo usermod -a -G docker ec2-use == add to the group because docker is working on not root user
+					docker should be run on root user only
+
+[ec2-user@ip-172-31-17-114 ~]$ docker ps
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2...": 
+dial unix /var/run/docker.sock: connect: permission denied
+[ec2-user@ip-172-31-17-114 ~]$ chmod 777 /var/run/docker.sock
+chmod: changing permissions of '/var/run/docker.sock': Operation not permitted
+[ec2-user@ip-172-31-17-114 ~]$ sudo chmod 777 /var/run/docker.sock               === sudo chmod 777 
+
+now docker is installed successfully
+
+if you hit the below command > docker ps means you may able to see these
+
+docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+------------------------------
+
+step 2
+
+2. Create a Dockerfile for application and apache installation
+
+Create one Dockerfile - vi Dockerfile
+
+#Docker file for ECS Fargate
+				base container sett panurathu
+From ubuntu:18.04 	= means take one ubuntucontainer, container are light weight it don't have full OS, having minimalist of what need for that ubuntu OS 90mb size mostly orginal 				ubuntu have 1gb approx
+
+#Installing Apache
+
+RUN apt-get update -y   			-- intalling apache 
+RUN  apt-get -y install apache2			-- 
+#Sample hello world application			
+RUN echo 'Hello demo samleapp using docker fargate!!!!!!' > /var/www/html/index.html
+
+#Configure apache
+
+RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \
+    echo 'mkdir -p /var/run/apache2' >> /root/run_apache.sh && \
+    echo 'mkdir -p /var/lock/apache2' >> /root/run_apache.sh && \
+    echo '/usr/sbin/apache2 -D FOREGROUND' >> /root/run_apache.sh && \
+    chmod 755 /root/run_apache.sh
+
+EXPOSE 80   - container run on 80 port so exposing it using this command
+
+CMD /root/run_apache.sh    -== on the run-apache.sh scrpti we have give all the above echo lines righy	, so to run this we are us or executing purpose
+
+-----------------------------------
+
+we can't able to run the docker file as a container so that we need to build that to image/template
+
+
+3. Build the docker image  
+
+docker build -t multicontainer .  = t for tag and name="multicontinaeer or whateve"  dot. means docker file location path 
+
+4. after this you can see the built images using "docker image
+
+[ec2-user@ip-172-31-17-114 ~]$ docker images
+REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+multicontainer   latest    279a69295b1c   26 seconds ago   205MB
+
+so far on instance we have ubuntu,application and middleware  overall 205mb only
+
+
+5. run the docker container using image
+we are binding/bound continer port 80 with the host/ec2 port 8080 ie unused port  	
+
+docker run -itd -p 8080:80 multicontainer     input terminal detached port 80 80 is system EC2 port container also run on 80 port
+
+if you want to run another continar means just change the port is fine
+
+docker run -itd -p 8081:80 multicontainer   == so 8081 la another application run agum
+
+--------
+
+so if you run this ec2 i nstance public ip,  http://107.20.120.188:8080/  you will get you application Hello demo samleapp using docker fargate!!!!!!
+
+like this you can ran any number of application inside single instance EC2
+
+-------
+
+now going to push this eo amazon ECR, so that i can on a new server EC2 , using IMAGEid i can run anyumber of containers on another server also
+
+========================================
+step1: go to elastic container registry
+so eventhough using dashboard you can creaqte new registry , but you are going to push image from inside the server right
+
+To create the ECR from CLI
+
+6. Create one ROLE for EC2 -> ECRfull access or Admin full access
+
+created on reposotiy and pushed imageid from server to this repository using CLI commands
+
+
+now =========
+
+elastic continer service
+create cluseert
+choose fargate as a infrastructure
+
+
+
+
+
 
 
 
