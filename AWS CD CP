@@ -1,1 +1,8 @@
+aws provided devops tool::
+    cd code deploy - manual deployment process
+    cp code pipeline - automation -ci tool
+--------------------
 
+
+from developer EC2 > we put code on S3 the using CD  we are giont to deploy
+cp  use eppollam code changes happening on S3 means it will automaically deploy those changes
