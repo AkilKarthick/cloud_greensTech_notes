@@ -196,9 +196,41 @@ created on reposotiy and pushed imageid from server to this repository using CLI
 
 now =========
 
-elastic continer service
-create cluseert
-choose fargate as a infrastructure
+now =========
+
+elastic container service--fully managed container
+
+1.creating cluster first- where we deploy our container
+	.select fargate serverless
+2.open the creatd cluster > open Task - where we run our continaer
+before creating a task we should have TASK definition first
+
+so create a task definition family first
+name : ecstd
+need to define container settings
+cpu .25 & memeory .5 memeory
+task role: ECS task role create new one
+
+continue name:
+image uri: go to registry and put over here
+port: 80 container
+
+then go to cluster add that task details
+capacity provider stategy as compute config
+on n/w : security group add your ALL-TCP
+
+after provision you got the public IP to  see the output
+
+task - single container run panurthu
+service - a load balancer la run pani pakurathu
+
+same kike creatin a service
+use taks definition family
+environment capacity provide stategy, fargate
+deploy confirmation: replica and desired task: 2
+n/w select your ALL=TCP
+create new load blacner
+target groupname and 
 
 
 
