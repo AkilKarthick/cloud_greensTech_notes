@@ -1,0 +1,67 @@
+for a classi load balancer we need a launch template first
+
+#!/bin/bash
+# Install Apache HTTP server
+yum install httpd -y
+
+# Start and enable Apache to run on boot
+systemctl start httpd
+systemctl enable httpd
+
+# Fetch instance details
+HOSTNAME=$(hostname)
+IP_ADDRESS=$(hostname -I | awk '{print $1}')
+UPTIME=$(uptime -p)
+DATE=$(date)
+INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
+
+# Create HTML content
+cat <<EOF > /var/www/html/index.html
+<html>
+<head>
+    <title>Load Balancer Instance</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f0f0; }
+        h1 { color: #2e6da4; }
+        table { margin: auto; border-collapse: collapse; }
+        td, th { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #2e6da4; color: white; }
+    </style>
+</head>
+<body>
+    <h1>This is my Load Balancer instance: $HOSTNAME</h1>
+    <p>Served from: <strong>$AZ</strong></p>
+    <table>
+        <tr><th>Instance ID</th><td>$INSTANCE_ID</td></tr>
+        <tr><th>IP Address</th><td>$IP_ADDRESS</td></tr>
+        <tr><th>Uptime</th><td>$UPTIME</td></tr>
+        <tr><th>Current Date</th><td>$DATE</td></tr>
+    </table>
+</body>
+</html>
+
+
+created a template not an instance
+
+
+step2: now going to create a load balancer
+
+select classi lb
+name: clb
+select, internet-facing as a shckeme; then only you can hit IP on browser
+
+ste3: by using autoscaling group we are going to connect our launch template and load balancer
+
+create auto scaling group
+name;ASG
+select your template here
+while attaching to the load balancer
+1. for classic easey
+2 but for other application/gateway/network lb - you need a target group to connect 
+
+3. You can resize your Auto Scaling group manually or automatically
+min 2 and max 4
+
+4, you can check with public ip of created instance or with load balancer DNS
+
