@@ -6,3 +6,183 @@ aws provided devops tool::
 
 from developer EC2 > we put code on S3 the using CD  we are giont to deploy
 cp  use eppollam code changes happening on S3 means it will automaically deploy those changes
+--------------------------
+
+handonss project
+
+
+cd/cp- handsONN notes
+
+step1;
+create a new ROLE on IAM
+select entity  as AWS service and service : EC2
+ 	add permission: permission policy: s3 full access
+ ROLE NAME: EC2-S3-ROLE 
+do create a role 
+
+CREATE A ROLE FOR CODE DEPLOY AS WELL
+
+step2;
+create a user DEVELOPER and gave ADMIN_FULL ACCESS 
+also we need to take the access key once we are in machine developer
+
+step3: create on EC2 instance conside this as a production 
+gave tag instead of name,   AppName Tag with value SampleApp
+and on advance details give IAM iinstnace profile as EC2-S3_role select the role
+
+execute all this on you prod machine 
+
+# yum update
+# yum install ruby -y
+# yum install wget -y    - using this you can get from local
+# wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install         cd agent a external a ulla kondu varoom using wget url
+# chmod +x install                 permission to exsute
+# ./install auto
+# service codedeploy-agent status
+
+now 
+The AWS CodeDeploy agent is running as PID 26317
+
+done with production server---------------------------------------------------------------------------------------------------------
+
+do launch another instance Ec2- name DEVELoPER MACHINE
+
+	
+now you need to do 
+aws configure on the dev machine
+
+[root@ip-172-31-22-143 ~]# aws configure
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]: 
+Default region name [None]: us-east-1
+Default output format [None]: json
+
+crerate this 
+/root/deploy_dir/sampleapp
+
+create one index.html
+
+now going to create one automation script here
+vi appspec.yml
+
+  /var/www/html/  - web server oda default html path
+
+[root@ip-172-31-22-143 scripts]# vi httpd_install.sh
+[root@ip-172-31-22-143 scripts]# vi httpd_start.sh
+[root@ip-172-31-22-143 scripts]# vi httpd_stop.sh
+[root@ip-172-31-22-143 scripts]# ls
+httpd_install.sh  httpd_start.sh  httpd_stop.sh
+[root@ip-172-31-22-143 scripts]# pwd
+/root/deploy_dir/sampleapp/scripts
+[root@ip-172-31-22-143 scripts]#
+
+
+[root@ip-172-30-0-178 deploy_dir]# cat sampleapp/scripts/httpd_install.sh
+#!/bin/bash
+yum install -y httpd
+
+[root@ip-172-30-0-178 deploy_dir]# cat sampleapp/scripts/httpd_start.sh
+#!/bin/bash
+systemctl start httpd
+systemctl enable httpd
+
+[root@ip-172-30-0-178 deploy_dir]# cat sampleapp/scripts/httpd_stop.sh
+#!/bin/bash
+systemctl stop httpd
+systemctl disable httpd
+
+
+- Create S3 bucket for uploading the code, 
+
+go to the code deploy and seach whether anyting present ther or not
+
+now execute this on dev machin, 
+
+[root@ip-172-31-22-143 sampleapp]# ls
+appspec.yml  index.html  scripts
+[root@ip-172-31-22-143 sampleapp]# aws deploy create-application --application-name sampleapp
+{
+    "applicationId": "015665d1-b971-4deb-bbc5-af67ecbe5bd6"
+}
+[root@ip-172-31-22-143 sampleapp]#
+
+now application get displayed on code deply
+
+now push from devmachine to S3,
+
+aws deploy push --application-name sampleapp --s3-location s3://13-08-25lk/sampleapp.zip
+
+check on s3 you see the sampleapp.zip there
+==
+
+now do create a deployment group
+
+CodeDeploy
+Applications
+sampleapp
+Create deployment group
+
+Service role- connect your role CD-role one which we crete on IAM role
+on Environment configuration,
+
+select EC2 and your tag Tag group 1 Key
+AppName
+Value - optional
+unchek load balancer> do create deployment grou
+
+now create deployement 
+
+deploymenent settings like
+Revision location
+Copy and paste the Amazon S3 bucket where your revision is stored
+do create deploymenet
+
+
+code pipeline--------------------------------------------------------------
+
+do some modicification on the index.html code
+
+[root@ip-172-31-22-143 sampleapp]# ls
+appspec.yml  index.html  scripts
+[root@ip-172-31-22-143 sampleapp]# vi index.html
+
+on the code deploy console itself you see pipelince do create pipeline there
+build a custion piplien > used with in aws
+Pipeline settings
+Pipeline name: sample
+Service role: automatic created
+Add source stage Info
+
+Source
+Source provider
+This is where you stored your input artifacts for your pipeline. Choose the provider and then provide the connection details.
+
+Amazon S3
+Bucket
+13-08-25lk
+
+S3 object key
+sampleapp.zip
+Enter the object key. You can include a file path without the delimiter character (/) at the beginning. Include the file extension. Example: SampleApp.zip
+
+Deploy
+Deploy provider
+Application name: sampleapp
+Deployment group: MY-DG
+
+do zipp the sampleapp why mbz we had done some changes
+
+[root@ip-172-31-22-143 deploy_dir]# ls
+sampleapp
+[root@ip-172-31-22-143 deploy_dir]# cd sampleapp
+[root@ip-172-31-22-143 sampleapp]# zip  -r    ../sampleapp.zip   .
+
+now run this on dev macin to send the code to s3 again
+
+aws s3 cp sampleapp.zip  s3://13-08-25lk
+
+
+
+
+
+
