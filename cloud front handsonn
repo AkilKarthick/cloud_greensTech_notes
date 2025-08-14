@@ -1,0 +1,70 @@
+created on s3 bucket private and upload your static content wesite as a object 
+
+now going to create a cloud front distribution name:
+select single website or app - single domain
+
+select orgin type : s3
+select your s3 bucket 
+
+waf- amazon internal threat intelligents
+web application firewall = to check our application vulnarabilities, 
+
+how you host a static conent?
+
+cloud front > secured a use pana we use WAF to protect malciour attach, ddos attach
+
+disable waf security it will cost higher
+
+
+if your cloud front need to access that created S3 private bucket means , earlier you need to update bucke policy manually now no need 
+aws itself update here go to BUCKER PERMISSINOn to see this policy
+
+
+see here  oly that specific distrubiotn can use the getobjcet nu defined below on the bucket policy so so secure
+  "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::14-08-25pvlk/*",
+            "Condition": {
+                "ArnLike": {
+                    "AWS:SourceArn": "arn:aws:cloudfront::823091237790:distribution/E1JN3EJWB4SA65"
+                }
+
+open the created distrubtioin of cloud front, you get the domain 
+
+alternative domain names you can add via reoute 53
+
+if you are using HTTPS means you need to update your SSL cerficate ther on the edit settings option 
+
+,
+
+any one can access this url on world, you can ask why we can host this on s3 itself but it's region specific
+but cloud front is not region specific, even on cities also cloud front present it have no only on DC,
+
+
+
+
+cloud formation
+
+a devopse tool
+
+infrastructer as code -tool
+
+need to know json/yaml 
+
+100 vpc creationg will take some large time on manual creation
+but 10000 vpc created via cloud formation with in a seconds is possible 
+
+in real time we are not using cloud formation why because we use terraform on devops 
+
+5k plus provider so we use terraform for this 
+
+blocks
+
+
+parameter:
+
+resource:
+
+output:
+
+
+ 
