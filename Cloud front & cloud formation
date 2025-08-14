@@ -3,9 +3,11 @@ Cloud front & cloud formation
 1.cloud front = 
   cdn tool
   content delivery network tool
-  for eg, to make the appliction to reach the user soon
-  latency based up on application
-
+  for eg, to make the appliction to reach the user soon latency based up on application
+eg: hotstar la latency ilama pakaura cricket live match
+  for static conent delivery we use cloud front not for dynamic content
+  only to reduce latency
+    
 Edge location = 
 cache servers = temporary server 
 
