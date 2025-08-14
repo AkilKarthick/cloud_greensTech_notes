@@ -1,0 +1,66 @@
+step1: create new VPC
+	name: MY-VPC | Ipv4 CIDR: 10.0.0.0/16
+create vpc
+
+step2: subnets
+select you VPC, MY-VPC there
+Subnet name: PUBSUB & PVTSUB 
+10.0.1.0/24 & 10.0.2.0/24
+
+create two subnets
+
+step3: internet gateway
+
+name: MY-IGW
+create this first then you need to attach 
+go to ACTION > ATTACH VPC
+
+step4: Route Tables
+create public & private RT
+
+name : PUBRT & PVTRT
+select your vpc
+create it
+
+once you creat public route table,
+go to edit route table> add route > internet gateway and 0.0.0.0 & select your internet gateway there
+
+now association of pubsubnet with pub route table
+
+do the subnet association of privat subnt, only because natgateway is not yet created 
+
+stpe5: create security group now,
+name: PUB-SG
+select your : VPC : MY-VPC
+inboud rules: ssh,http,https,rdp source : anywhere
+
+name: PVt-SG
+select your vpc
+add inbound rules like 
+go to source search > select your public security grop created one & TYPE: ALL-TCP
+create security group
+
+stepp6: create EC2-instance windows
+
+pub inst
+select your vpc there
+and public subnet for public instance & vice versa
+AUTO ASSIGN public IP should enable for public only 
+select your public security group for public instance
+
+step7: create NAT gateway
+name: MY-NAT
+subnet: public subnet, why bcz we are creating it on pub subnet
+also allocate elastic IP
+
+launch your public windows machine via remote desktop
+we connected internet gateway right so n/w will be there
+
+now launch your private instance using private IP address inside your public machine Remote machine
+
+on private machine n/w not preented initially so you need to connect NAT 
+
+now edit your pvtrt and add route > natgateway select your nat gateway and do save changes
+
+
+
