@@ -1,1 +1,32 @@
 jekins -- 
+
+automation toool - we are going to schdule the work that we are going to do in manual
+
+we are going to buid pipeline here
+once code got pushed on git -> then 
+test > build > scan > containerzation > store that continaer > deply> monitor
+
+to integerate all devops tools in a single place - is jenkins
+award winning application= for deploymenet process effficient
+
+jenkins> java is needed > developed by java so java runtime is needed
+jenkins run on port : 8080 s
+
+step1: 
+create one instance name: jenkin_master and 2 instance enable 22 and 8080
+
+1.jenkin_master &
+2. jenkin_slave
+
+use pem key we can directly connet the instance by gong to cmd- on yuo machine
+cd Downloads
+ssh -i pemkeyname ubuntuUsername@12.234.234.112 pubilc ip
+
+install java on yuor instnace
+intall jenkins now
+
+systemctl status jenkins - to see process id
+
+run your public ip an/8080  - on browser
+
+sy
