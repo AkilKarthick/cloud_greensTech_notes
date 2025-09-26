@@ -1,1 +1,64 @@
 IAM 
+
+beginner level
+
+what is IAM aws ?
+
+identity access amangement - 
+it is a webservice that control access to aws services and resoureces for users.
+it provide user management| roles | policies and MFA to ensure secure access control
+assigning specific permission to the users
+
+what are IAM users, groups & roles?
+
+IAM users: individual accounts with credentials
+IAM groups: collection of users with permissions that apply to all memeber in the group
+IAM roles: provide temporary credentials to perform specific task
+
+what is IAM policies?
+
+it is Json formatted documents 
+policies contain statements with elements
+Effect(allow or deney)
+actions(specific aws operation like s3.listbucket) &
+resoures(like s3 bucket ARN) 
+
+so policies can be attached to the user, group and roles
+
+
+what is the difference between INline vs Managed polcy
+
+inline policy: embedded directly within a user.group.or role
+Managed policy : standalone policy that can be attached to multple IAM entites easy to reuse
+
+what is AWS STS?
+
+security token service (sts) 
+provide temporaty, limied-privilege credentials for IAM roles or users
+enable cross acount acess as well
+
+how do you implemetn MFA with iam?
+
+mfa one time code from mobile app
+we can configure mfa seeting thorugh console or cli
+it enhance secirty by preventing access without the additional code
+
+leaast privilege in IAM?
+
+granting only necessary permission for a user or service to perfrom their taks
+
+How do you ensure secure access to AWS resources from an EC2 instance?
+
+Use IAM roles attached to the EC2 instance, which provide temporary credentials
+without embedding access keys in the instance or code. For example, attach a role with 
+a policy allowing DynamoDB read access if the instance needs to access DynamoDB
+
+
+How do you audit and monitor IAM activity?
+
+use cloud trail to log IAM api activity and review aws iam credential report for user sercurity
+prosutre
+
+
+
+
