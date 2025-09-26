@@ -1,0 +1,348 @@
+TERRAFORM
+
+it is an infrastructer as a code
+owned by hasingcorp- corporation
+
+hashicorp configuration language
+
+this is a multicloud tool i can use this on anywhere
+
+
+own cloud infrastructer tools
+
+aws - cloudformation
+Azure - arm or biceps
+
+state-file -> 
+tracking file it will track the resoures that we created
+
+to create 10 ec2 - 1-ec2 created in AWS console
+
+if i manuallly ddlete 9 & 10th instance 
+
+when ever your resoure created their terafrom state file got created(consit of tracking files)
+remember i deleteed via manually not via code
+if again i run this code means it refer the - state file - first
+
+it Re-create the missing resoure(intance) & update the metadata on  state file
+
+-------------
+
+.tf  - extension
+
+main.tf
+variable.tf
+output.tf
+
+main.tf = how to execute this
+
+1. terraform init : this command will initialize 
+
+hint; we alway use 2 years old back version
+
+------------------------------------------------------
+Types of block
+
+terraform block - aws,azure version
+provider block - aws -> region 
+resoures block - EC2, vpc, s3, iam, etc
+data block ? not used widely 
+output block  -to print output
+				if i dont have console access right so need to see output 
+				means on terraform		to see ecc2 id, public ip, pvt ips
+				s3 arn , vpc id 
+variable block - eg instance type=x; i can use the variable 
+					x = t2.micro somewhere on other area
+				
+-------------------------------------------------------
+-------------
+main.tf eg:
+------------
+#terafrom block
+
+it is the start of the configuration file
+
+1.specifies requried versions eg: acceptable vers of terraform CLI
+2.specifires required providers eg: AWS.azure
+
+#TERRAFORM block
+
+terafrom{
+		required_providers{
+			aws= {
+				source = "hashicorp/aws"
+				version = "-> 3.0"  #above 3 must version
+				}
+			}
+		}
+		
+//also adding Backend as S3 for remote state storage
+
+backend "s3" {    // this wont create need to give xisting bucket
+	bucket = ""
+	key ="dev/terraform.tfstate"  //
+	regions =" "
+	}
+}
+
+#provider block 
+| attributes like conection details & regions provided here
+
+
+provider = "aws" {  #provider name
+	
+		region = "eu-wet-2 "
+		profile = " default "
+}
+
+
+#Resource Block : 
+the fundamaneta building block that defines a specific 
+piece of infrastructre, you want to create manage or modify through terraform
+
+where real infrastructer elements managed by terraform
+#each resource block corresponds to an infrastructer objects				
+#create EC2 instance
+
+resoure "aws_instance" "my_ec2_vm" { 
+ # here aws_instance is "resource-type" && "my_ec2_vm" is the "unique name" given to this resourece block
+	
+		ami = ""
+		instance_type = ""
+		availability_zone = ""
+		tags = {
+			"Name" = "web"
+			
+				}			
+}
+-----------------------------------
+
+	terrafrom commands
+-----------------------------------
+
+	terraform init  :: it will provide plugins downloaded & terraform backend
+				
+				it will initialize the backend
+				initialize provider plugins
+				
+				if sucess means it show "terraform has been succefully initiaized"
+				
+				so it will create  a lock file.terraform.loc.hcl
+				to maintain resource version maintaining purpose in  consitently 
+				
+	terraform validate :: it will check the syntax 
+
+				succcess:: the configuration is validated
+
+	terraform plan :: show what are get initialize list of added resoure
+						added 4 delte 0 change 0 eg
+						
+				it will show what are the resoure got created it shocased on cli
+				perform some action to crate above
+				
+					
+	terraform apply :: to create a resoure at final
+	
+				it will ask yes/no
+				so give like 
+		terraform apply --auto-approved
+				
+
+	terraform destroy:: created resoure got destroyed
+-------------------------------------------------------------------------
+
+a.terraform modules --> a code , which i can reuse
+b.terraform backend --> statefile is imporant --> so save it on local,remote like s3
+					  s3 bucker version enabled as well for recovering purpose
+
+terraform modules - 
+used for reuse purpose,
+
+modules
+	ec2	
+		main.tf
+		variable.tf
+		output.tf
+	s3
+		main.tf
+		variable.tf
+		output.tf
+	vpc
+		//
+----------------	
+		
+data = /modulles/ec2-foler  --? run this to create resource when ever i needed
+
+so terraform is saved  on repos as wll like s3, 
+=========================================================================
+
+how to do it on windows
+
+need to install windows binary 
+go to downoads :/  open terafrom.zip
+
+zip>unzip>copy>localdiskC-> create a directory terraform>copy -->copy that path
+c:/terraform
+
+add it on systemvariable
+
+
+
+------
+
+major change  : means changing ami.region etc
+minor change  : machine got update only t2. to t3eg
+
+how to create resoure on multiple regions, then backend
+
+
+for major change
+---------------
+try like change availability_zone: to new 
+
+now do terraform apply --auto-approved
+
+it will refreshig state file : it will show 1 to add, 0 to change, 1 to destroy
+
+it will take backup of exiting terraform.tfsstate.backup 
+
+
+for minor change
+----------------
+tag,t3 to t2
+
+terraform destroy -- to destroy
+
+----------------
+
+how to create resoure that presnt on single file but need to create it on multiple regions
+
+using alias - i have single script but i need to create resource on 
+				multiple provider/region means use alias
+				
+		normally it create on default!!
+
+
+#provider 1 for ec-west-2 (default provieder)
+provider = "aws" {  #provider name
+	
+		region = "eu-wet-2 "
+		profile = " default "
+}
+
+# provider 2 for us-west-1
+provider = "aws" {  
+	
+		region = "us-west-1 "
+		alisa = " my-west "
+		profile = " default "
+}
+
+if you want to create a resoure not on default provider but on new providre means
+on resourceblock include alias to create this on provider 2
+
+resoure "aws_instance" "my_ec2_vm" { 
+ # 
+	
+		ami = ""
+		instance_type = ""
+		availability_zone = ""
+		
+		provider = aws.my-west  //here aliased got called
+		tags = {
+			"Name" = "web"
+			
+				}	
+				------------------
+				
+				
+varialble.tf use cases
+
+-----------
+provider.tf
+-----------
+#provider block
+provider "aws" {
+	region = var.aws_regions_mumbai
+	profile = "default"
+}
+
+so main.tf is your main file everytime if any changes required means don't
+do update on it directly instead create a variable.tf and do minor changes if required
+--------------------
+see here on main.tf
+------------------
+for eg:
+	#create EC2 instance 
+	
+resoure "aws_instance" "my_ec2_vm" { 
+
+		ami 				= var.ec2_ami_id  //  here var referneced used
+		instance_type 		= "t2.micro"
+		availability_zone 	= var.ec2_instance_count
+		user_data           = <<-EOF
+		#!/bin/bash
+		sudo yum update -y ..
+}
+
+-------------
+varibales.tf
+--------------
+
+#input variables
+variable "aws_region_mumbai" {
+	descritption	="region in whcih aws cresoure created"
+	type			=string
+	default 		="ap-south-1"
+}
+variable "ec2_ami_id" {
+	descritption	="ami id"
+	type			=string
+	default 		="ami-hadfjahsdfkj23" #amazon2 linux AMI ID
+}
+
+-------------------------------------
+so if you want to see output means
+
+output.tf
+---------
+
+#define output values
+#Attribut reference: EC2 instnace public ip
+output "ec2_instance_pubicip" {
+	description ="EC2 Instance public ip"
+	value = aws_instance.my-ec2-vm.public-ip
+}
+
+terraform init
+terraform apply --auto-approved
+
+so there were displayed on cli like
+changes to ouptut
+...
+..
+.
+
+------------
+if i crreate 5 instance via terraform and delete 1 via console means
+then if i again try to do it on cli
+
+terraform plan :: this will refer state file check with console state file & this state file
+and show what is missing and what to add
+
+so this is called terraform trift
+
+now i execute
+
+terraform apply --auto-approved
+
+only missing resoure got created 
+
+-----------------------------------------
+plz see  these below life cycle argumenst
+
+create before desroy
+prevent destroy
+igonre changes
+depends on 
+------------------------------------------
