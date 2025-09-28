@@ -1,0 +1,22 @@
+VPC 
+
+vpc virtual private cloud
+
+aws la oru "isolated n/w environment" vpc
+ithulah {{ subnets, Route-Tables, internet Gateway, NatGateWay }}   -- we can configure all these and create a own n/w
+
+for EG::
+
+oru big organiztion la Dev| TESting | Prod nu 3 environment iurku!!
+  if you have to create one VPC in AWS
+nama vpc kullah 3 subnet podalam
+
+prod subnet -- intenet gateway attach panalam -- so public facing web appplication vaikalm
+Dev subnet -- NatGateway - so private a irunthalum veli internet ku pogamudiyum
+Testing subnet -- vpn gateway moolama onpermise n/w connect panalam
+
+during configurin these, security group use pani port open panalam!! 
+we can restrict traffic, entha traffic allow panalamnu manage panalam
+
+
+
