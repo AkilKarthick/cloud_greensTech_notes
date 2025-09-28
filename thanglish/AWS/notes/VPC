@@ -28,6 +28,10 @@ NACL - subnet level la traffic manage panurathu
 
 2.VPC peering?
 
+multiple VPC direct a securelty connect panalam
+for eg: oru organization la prod env and deve environ different VPC la iurkuna
+securely communication ky VPC peering setup, data's private a share panilam
+
   
 
 
