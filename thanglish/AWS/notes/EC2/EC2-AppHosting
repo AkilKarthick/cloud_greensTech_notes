@@ -1,0 +1,10 @@
+EC2-AppHosting
+
+launch one EC2 instance
+t2micro mathiri oru free tier eduthukulam
+  do login to instance
+install apacher r nginx webserver 
+copy your code 
+security group https/https porst open pananum
+ie 80 kum 443 kum access kodukanum
+aWS elastic IP assign pananum, use that Ip address and hit on browser to see website
