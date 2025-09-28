@@ -1,1 +1,9 @@
 IAM_notes
+
+
+aws identity access management = yaru enna resourec use panalam, yaruku enna permission tharalam ithellam control panthuku ull service
+nama policies create pani, user, group & role ellathayum manage panalam, so ithalanal securtiy controll la maintain panalam
+
+users: nama employess or system memebers ky enna mathiri activites they can done, which we can give via policies
+Roles: TEMPORARY PERMSSION kodukuar mathiri, one serive trying to access another  serbive in this case we can use roles
+policies: json format la iurrkum, means which user what perssion for which resourec he can access which i can give it on policiees
