@@ -5,8 +5,13 @@ oru vitaul sever, cloud la compute mathiri like VM
 
  virtual server on the cloud that can run applicaiton
 
-how do you secure an EC2 instance?
+1.how do you secure an EC2 instance?
   using security groups, IAM roles and by enabling encryption for data
+
+
+
+
+
 
 how do you handle high availability and fault tolerence?
 
