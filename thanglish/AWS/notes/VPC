@@ -18,5 +18,18 @@ Testing subnet -- vpn gateway moolama onpermise n/w connect panalam
 during configurin these, security group use pani port open panalam!! 
 we can restrict traffic, entha traffic allow panalamnu manage panalam
 
+1, difference between security group & nacl?
+
+securit group - on your EC2 instance la, inbout- outbound traffice ah instance level la managenge panalam
+              ithu stateful, means one time inbount traffice if you allowd means, outgoing traffic automatic ah allowd
+
+NACL - subnet level la traffic manage panurathu
+      ith stateless, means inboud and outboud ku sepeate rules define pananum
+
+2.VPC peering?
+
+  
+
+
 
 
