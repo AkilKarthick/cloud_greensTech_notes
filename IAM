@@ -150,17 +150,12 @@ aws --version
 Try command:
 
 aws s3 ls
-
-
 Error:
 ❗ Unable to locate credentials
 
-Configure credentials:
+Configure credentials: using 'aws configure
 
-aws configure
-
-
-It asks:
+It asks: below details
 
 AWS Access Key ID:
 AWS Secret Access Key:
@@ -174,16 +169,20 @@ This creates:
     credentials
     config
 
-🔹 Multiple Users in CLI (Profiles)
+🔹 Multiple Users in CLI (Profiles)  use 
 
 For siva:
 
 aws configure --profile siva
 
-
 Then use:
 
 aws s3 ls --profile siva
+
+you can create access key by clicking on
+1.select cli access
+then you got th access key with secrete key(one time viewinog)
+
 
 🔹 Inline Policies
 
