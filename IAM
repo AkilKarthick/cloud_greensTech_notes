@@ -1,163 +1,223 @@
-IAM
-identiy access management
+✅ IAM – Identity & Access Management
+🔹 What is IAM?
 
-authentication - id alloted member can enter office
-autorization - even id cardmemeeber can enter and have certian roles and permission
+IAM (Identity and Access Management) helps you securely control access to AWS resources.
 
-authentication
-  user  - user defince panurtathu
-  groups  - group of users
-  roles -  we can give privilege to senior resource for temporary purpose
-            client visit during we give temporary password/visitory ID
+🔹 Authentication vs Authorization
+1️⃣ Authentication — “Who are you?”
 
-autorization
-  policiyes  - DO AND don'ts permssions
+Office example:
+A member with an ID card can enter the office.
 
-AWS resources (ec2 instance is the resouce)
-we can acess/modify/manage recouse via,  console management (GUI) , CLI,
+AWS:
 
-how application work
+User → an individual identity created inside AWS
 
-client server conect via API is SDK software developmement kit
+Groups → collection of users
 
-------------------------------------------------------
-1. open IAM >IAM dashboard
-2.create user
-  name: ram
-provide euser access to aws management console -optoinal    
-              hint; on real time they only give iam user not root acount only billing 
-                    EVEN admin has root 
-                        for security breach 
-i want to create an iam user
+Roles → temporary privileges
 
-4.give custom password: Admin123
+Example: Client visits → you give temporary visitor ID / temporary access
 
-3.set permission
-  gave permission option
-  attach policy directly > policy can be *aws managed or *custom manaaged
-i give IAM read only acccess for EG
+2️⃣ Authorization — “What can you do?”
 
-5.create user
+Even if a person enters the office, he has only specific permissions.
 
-finally, we get
+In AWS:
 
-console sign in details,
-  console sigin url |  eg: https://accountdetailnumber.sigin.aws.amazon.com/console
-  user name: ram | 
-  password: Admin123 | we can download this as CSV
+Policies (JSON documents) → contain Allow / Deny for actions
+Example: Start EC2, Stop EC2, Read S3, etc.
 
-https://accountdetailnumber.sigin.aws.amazon.com/console
-  this is not secure, 
-so go to dashboard > go to AWS Account Alias> create like: sample-test
+🔹 Accessing AWS Resources
 
-now accountid got changed to 
-https://sample-test.sigin.aws.amazon.com/console
+AWS resources example: EC2 instance
 
-open incognito browser to login as IAM user signin
+You can access/modify/manage resources via:
 
-hint: in realtime they give IAM account only
-for billing: : root account> proof biling
+Console (GUI)
 
-so you only authozised to read IAM onlyyy user, RAM
+AWS CLI
 
-now goint to create another user siva
-and gave cli access and not management console access
-    username:siva
-    no permission
-you may endup with ACCESS DENIED to IAM:createUser
+SDKs (API calls)
 
-now goint to create a group :DEV
-add ram over there
+Applications work using:
 
-policies: IAM full access
+Client ↔ Server via API
 
-permission:
-wihtin a group you can add max 10 policies
-click on user> it shows ram
+SDK = Software Development Kit (used to integrate AWS API)
 
-fro eg: dev team i gave required preiveldge
+🔹 Creating an IAM User (Example)
 
-go to ram user > summary  you can able to see ACCESS KEY 1> means ram doesn't have CLI ACCESS 
-you can enable that by go to Secrity credentials- enable there
-you can create two at t time for a user that is used on CLI
+Open IAM → IAM Dashboard
 
-CLI password is the access key
+Create User
 
-AWS CLI install
-then 
+Username: ram
+
+“Provide user access to AWS Management Console” → optional
+
+💡 Real-time hint:
+Companies never give root account.
+Even admins use IAM user, root is used only for billing or account recovery.
+
+Set custom password
+
+Example: Admin123
+
+Set Permission
+
+Choose Attach policy directly
+
+AWS Managed / Customer Managed
+
+Example: IAMReadOnlyAccess
+
+Create User
+
+You get:
+
+Sign-in URL
+
+Username
+
+Password
+
+CSV download option
+
+Example URL:
+https://account-number.signin.aws.amazon.com/console
+
+🔹 Customizing Sign-In URL (Account Alias)
+
+Default URL (not user-friendly):
+https://123456789.signin.aws.amazon.com/console
+
+Change alias:
+IAM Dashboard → Account Alias
+
+Example: sample-test
+
+New URL:
+https://sample-test.signin.aws.amazon.com/console
+
+🔹 Logging in as IAM User
+
+Open incognito → enter user sign-in URL
+
+Remember:
+
+For billing → root account
+
+For daily AWS usage → IAM user (e.g., ram)
+
+🔹 Example: Creating another user “siva”
+
+Only CLI access
+
+No console access
+
+If no permissions → you will get:
+
+❗ AccessDenied: IAM:CreateUser
+
+🔹 Creating a Group
+
+Create group: DEV
+
+Add user: ram
+
+Attach policies:
+
+Example: IAMFullAccess
+
+Max: 10 policies per group
+
+User → Summary tab:
+You can see Access Keys
+
+If Access Key = None → user does not have CLI access
+→ Go to Security Credentials → Create Access Key
+
+One IAM user can have maximum 2 access keys.
+
+🔹 AWS CLI Installation & Configuration
+
+Check version:
 
 aws --version
-rm .aws  
-ls -a| .aws  
-
-first setp 
 
 
-aws s3 ls  > you get unable to locate credentials. you can configure credentials by runung "AWS configure".
->ls -a > to find .aws file
->aws configure
-it wil ask access key if 
-aws access key id: myaccesskey
-aws secret access key : mysecret
-default output format : json
-default region name: ap-south-1
+Try command:
 
-now it you run this command
-aws s3 ls > you get invalid access key  not present on the record
-ls -a| grep .aws
-.aws file got created
+aws s3 ls
 
-to configure multple user 
+
+Error:
+❗ Unable to locate credentials
+
+Configure credentials:
+
+aws configure
+
+
+It asks:
+
+AWS Access Key ID:
+AWS Secret Access Key:
+Default region: ap-south-1
+Output format: json
+
+
+This creates:
+
+~/.aws/
+    credentials
+    config
+
+🔹 Multiple Users in CLI (Profiles)
+
+For siva:
 
 aws configure --profile siva
-it ask fresh if! see below
-aws access id:
-aws secrete id;
-default regionname:
-output: json
 
-now go to the console and create access key for siva>
-copy that and put if on the above
 
-asw s3 ls > you get error like invalid access key bcz you first create a dummy
-aws s3 ls --profile siva 
+Then use:
 
-no ging to give direct permission to siva > like create inline policies> 
+aws s3 ls --profile siva
 
-inline policy means giveing specific permission to user,group and roles
-we can't share among us, once delete the use it may disapper
+🔹 Inline Policies
 
-------------
+Inline policy:
 
-how to create policy::
+Direct permission for one user/group/role
 
-create policy> select a service (EC2)
-you can give action all or specifice action
+Cannot be reused or shared
 
-you can add user ARN, it will come
+If the user is deleted → inline policy is also deleted
 
-we need to know json or Yaml format <
+Used for very specific custom permissions
+
+🔹 Creating Custom Policy (Example)
+
+IAM → Policies → Create Policy
+
+Select Service (Example: EC2)
+
+Choose actions (All / Specific)
+
+Add Resource ARN
+
+Review → Create
+
+Example JSON format:
 
 {
-
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "ec2:DescribeInstances"
+    ],
+    "Resource": "*"
+  }]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
