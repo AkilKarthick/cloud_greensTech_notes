@@ -183,17 +183,12 @@ you can create access key by clicking on
 1.select cli access
 then you got th access key with secrete key(one time viewinog)
 
+cusot
 
 🔹 Inline Policies
 
-Inline policy:
-
-Direct permission for one user/group/role
-
-Cannot be reused or shared
-
-If the user is deleted → inline policy is also deleted
-
+Inline policy: Direct permission for one user/group/role
+Cannot be reused or shared, If the user is deleted → inline policy is also deleted
 Used for very specific custom permissions
 
 🔹 Creating Custom Policy (Example)
