@@ -155,6 +155,12 @@ Error:
 
 Configure credentials: using 'aws configure
 
+so for eg
+it is not secure to configure your credentials 
+on a server which is used across by team also 
+
+
+
 It asks: below details
 
 AWS Access Key ID:
@@ -188,11 +194,16 @@ cusot
 🔹 Inline Policies
 
 Inline policy: Direct permission for one user/group/role
-Cannot be reused or shared, If the user is deleted → inline policy is also deleted
-Used for very specific custom permissions
+Cannot be reused or shared, 
+If the user is deleted → inline policy is also deleted
+Used for very specific custom permission
+inline policy is imline managed we can add it to the user/group directly
 
-custom managed: means you created the policy , you can share across group.user
+custom managed:
+means you created the policy,
+you can be shared across group/user/roles
 even you delete this it will reamain their
+this is AWS managed Type
 
 🔹 Creating Custom Policy (Example) 
 using visual & Json
@@ -236,4 +247,19 @@ Resoure: instance/elsaticip/user/group etc...
 
 
 arn:aws:IAM::123423:group/{Instanceid}
+
+
+ROLE:
+create a role
+1.select the trusted entity first (for authentication like SAML 2.0 
+    do select AWS service
+we can crete a cusstom trust policy as well!
+
+2.ADD permission
+3.name.review and do create Role!
+
+and attach this role to the EC2 instance we created to view IAM user list on 
+the created EC2 instanace with out doing aws configure
+
+
 
