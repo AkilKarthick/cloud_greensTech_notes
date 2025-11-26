@@ -191,27 +191,49 @@ Inline policy: Direct permission for one user/group/role
 Cannot be reused or shared, If the user is deleted → inline policy is also deleted
 Used for very specific custom permissions
 
-🔹 Creating Custom Policy (Example)
+custom managed: means you created the policy , you can share across group.user
+even you delete this it will reamain their
+
+🔹 Creating Custom Policy (Example) 
+using visual & Json
 
 IAM → Policies → Create Policy
-
-Select Service (Example: EC2)
-
-Choose actions (All / Specific)
-
-Add Resource ARN
-
+1.Select Service (Example: EC2)
+2.Choose actions (All / Specific) 
+all- means list/read/write/tagging etc
+3.Add Resource ARN (all or specific)
+4. we can give condition like requestcondition-
 Review → Create
+
+JSON editor is must known!
 
 Example JSON format:
 
 {
   "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": [
-      "ec2:DescribeInstances"
-    ],
+  "Statement": [
+                {
+                "sid": "statement",
+                "Effect": "Allow",  //allow or deney
+                "Action": [
+                  "ec2:Describe*"
+                        ],
     "Resource": "*"
   }]
 }
+
+what is ARN?
+what ever you hve created on aws which contain ARN
+amaxon resoure name
+
+for Region specif Resource we have to give Region
+or global specif Resoure(like iam) no need to give
+
+arn:aws:ec2:{ap-sount-1:{Account}:instnace/{Instance}
+
+Accountid:is 134234124 something like this
+Resoure: instance/elsaticip/user/group etc...
+
+
+arn:aws:IAM::123423:group/{Instanceid}
+
