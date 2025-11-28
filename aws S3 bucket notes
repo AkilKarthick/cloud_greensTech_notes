@@ -106,6 +106,10 @@ we have several option to do with our object
 
 go to properties on object
 1.encruption  = using key
+        types of Encryption:
+        1. SSE-S3 - s3 managed key
+        2.SSE-KMS = customer managed key
+        3.SSE_c = your bring your own key
 2. Inteligent tiering archieve configuration = 
                 we can create a poilicy like after 30 days it move to standerd..
 
@@ -122,7 +126,10 @@ go to properties on object
 
 permission
 
-1.buket policy =  for eg specifically you need to privide access s3 but this bucket access revoking
+1.Buket policy = 
+        json format applied at bucke level
+        used to allow public access,deny access, cross acount access
+        for eg specifically you need to privide access s3 but this bucket access revoking
         to give speicific bucket acees 
 2. metrices
         total bucket size
