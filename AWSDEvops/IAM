@@ -1,1 +1,236 @@
-iam
+✅ IAM – Identity & Access Management
+🔹 What is IAM?
+
+IAM (Identity and Access Management) helps you securely control access to AWS resources.
+
+🔹 Authentication vs Authorization
+1️⃣ Authentication — “Who are you?”
+
+Office example:
+A member with an ID card can enter the office.
+
+AWS:
+
+User → an individual identity created inside AWS
+Groups → collection of users
+Roles → temporary privileges
+
+Example: Client visits → you give temporary visitor ID / temporary access
+
+2️⃣ Authorization — “What can you do?”
+
+Even if a person enters the office, he has only specific permissions.
+
+In AWS:
+
+Policies (JSON documents) → contain Allow / Deny for actions
+Example: Start EC2, Stop EC2, Read S3, etc.
+
+🔹 Accessing AWS Resources
+
+AWS resources example: EC2 instance
+
+You can access/modify/manage resources via:
+
+Console (GUI)
+AWS CLI
+SDKs (API calls)
+
+Applications work using:
+
+Client ↔ Server via API
+
+SDK = Software Development Kit (used to integrate AWS API)
+
+🔹 Creating an IAM User (Example)
+
+Open IAM → IAM Dashboard
+Create User
+Username: ram
+“Provide user access to AWS Management Console” → optional
+    💡 Real-time hint:
+Companies never give root account.
+Even admins use IAM user, root is used only for billing or account recovery.
+
+Set custom password
+Example: Admin123
+
+Set Permission
+Choose Attach policy directly
+    AWS Managed / Customer Managed
+
+Example: IAMReadOnlyAccess
+Create User
+You get:
+Sign-in URL
+
+Username
+
+Password
+
+CSV download option
+
+Example URL:
+https://account-number.signin.aws.amazon.com/console
+
+🔹 Customizing Sign-In URL (Account Alias)
+
+Default URL (not user-friendly):
+https://123456789.signin.aws.amazon.com/console
+
+Change alias:
+IAM Dashboard → Account Alias
+
+Example: sample-test
+
+New URL:
+https://sample-test.signin.aws.amazon.com/console
+
+🔹 Logging in as IAM User
+
+Open incognito → enter user sign-in URL
+
+Remember:
+
+For billing → root account
+
+For daily AWS usage → IAM user (e.g., ram)
+
+🔹 Example: Creating another user “siva”
+
+Only CLI access
+
+No console access
+
+If no permissions → you will get:
+
+❗ AccessDenied: IAM:CreateUser
+
+🔹 Creating a Group
+
+Create group: DEV
+    Add user: ram
+    Attach policies:
+    Example: IAMFullAccess
+
+Max: 10 policies per group
+
+User → Summary tab:
+You can see Access Keys
+
+If Access Key = None → user does not have CLI access
+→ Go to Security Credentials → Create Access Key
+
+One IAM user can have maximum 2 access keys.
+
+🔹 AWS CLI Installation & Configuration
+
+Check version:
+    aws --version
+Try command:
+    aws s3 ls
+Error:
+❗ Unable to locate credentials
+Configure credentials:
+    using 'aws configure
+
+so for eg
+it is not secure to configure your credentials , on a server which is used across by team also 
+It asks: below details
+
+AWS Access Key ID:
+AWS Secret Access Key:
+Default region: ap-south-1
+Output format: json
+
+
+This creates:
+
+~/.aws/
+    credentials
+    config
+
+🔹 Multiple Users in CLI (Profiles)  use 
+
+For siva:
+
+aws configure --profile siva
+Then use:
+aws s3 ls --profile siva
+
+you can create access key by clicking on
+1.select cli access
+then you got th access key with secrete key(one time viewing)
+
+cusot
+
+🔹 Inline Policies
+
+Inline policy: Direct permission for one user/group/role
+Cannot be reused or shared, 
+If the user is deleted → inline policy is also deleted
+Used for very specific custom permission
+inline policy is imline managed we can add it to the user/group directly
+
+custom managed:
+means you created the policy,
+you can be shared across group/user/roles
+even you delete this it will reamain their, this is AWS managed Type
+
+🔹 Creating Custom Policy (Example) 
+using visual & Json
+
+IAM → Policies → Create Policy
+1.Select Service (Example: EC2)
+2.Choose actions (All / Specific) 
+all- means list/read/write/tagging etc
+3.Add Resource ARN (all or specific)
+4. we can give condition like requestcondition-
+Review → Create
+
+JSON editor is must known!
+
+Example JSON format:
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+                {
+                "sid": "statement",
+                "Effect": "Allow",  //allow or deney
+                "Action": [
+                  "ec2:Describe*"
+                        ],
+    "Resource": "*"
+  }]
+}
+
+what is ARN?
+what ever you hve created on aws which contain ARN
+amaxon resoure name
+
+for Region specif Resource we have to give Region
+or global specif Resoure(like iam) no need to give
+
+arn:aws:ec2:{ap-sount-1:{Account}:instnace/{Instance}
+
+Accountid:is 134234124 something like this
+Resoure: instance/elsaticip/user/group etc...
+
+
+arn:aws:IAM::123423:group/{Instanceid}
+
+
+ROLE:
+    create a role
+    1.select the trusted entity first (for authentication like SAML 2.0 
+        do select AWS service
+    we can crete a cusstom trust policy as well!
+    
+    2.ADD permission
+    3.name.review and do create Role!
+    
+    and attach this role to the EC2 instance we created to view IAM user list on 
+    the created EC2 instanace with out doing aws configure
+
+
