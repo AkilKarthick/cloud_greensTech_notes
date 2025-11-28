@@ -1,0 +1,172 @@
+__aws S3 bucket notes__
+
+s3- simple storage services
+
+        it is an unlimited storage
+        is an object storeage service, used to store any amount of 
+        data like images,logs,backujs,static website file etc across highly durable, scalable 'buckets'
+        so S3 provide 99.99999 durability & high availalbitlit
+        it is an object storage not an Block or file
+
+Types of storage in aws
+        1.Block-
+        2.Object- s3
+        3.File-
+
+in S3 we have two concept:: CORE COMPONENTS
+       
+1.bucket-
+        folder like container to store objects
+        which should be Globally unique name
+        one region per bucket
+2.object-
+        Actual file(data + metadata)
+        identified using key ( foler/subfoler/file.txt )
+        metadata like (content type & encruption  info etc
+        file & folder that we store on file system
+
+for each aws account we can able to create "100" bucket only
+but we can create any number of object on a bucket so it is unlimited!!
+
+1 acc --> 100 bucket
+1 object --> 5tb (size)
+
+if we reached the limit 100 bucket per account , if we need additional 20 bucket then
+we can reachout to aws support & tell the requirement the it's possible
+
+
+we have
+        1.general purpose bucket - it's like a ware house
+        2.directory bucket - structural bucket
+                                eg college related data;s on colg direcotory , clg id . student id. etc
+                                each session data's present here
+
+======================================================
+
+how to create a s3 bucket || General purpose bucket ||
+
+step1: select region first eg uk or india whateve
+step2: bucket name should be unique, we have option like copy setting from existing bucket- option is there\
+step3: object ownership, ACL should disabled(recommended)
+        we have ACL access control list
+        if this ACL is enable then, object'sin the bucket can be owned by other AWS account.
+        access to the bucket and its object can be specififed by ACL.
+if it is disable: then i have the privligedd to allow the people whom all are need to use
+
+step4: 
+we have public bucket- 
+        private bucket-
+
+Bucket --   object       --res
+public      public   -everyone can accesss bucket
+public      private  -only bucket accees is there, but object is private so obj is not accessible,only perimssion user can access that
+private     private  -only permission user are allowded to access the bucket
+private     public   -you have to go inside bukcet first to access obj so not acessible right?
+                      obj is not accessible,
+                      but each objECT has an unique URL . we can access over there using that URL.
+
+step5: block public access- to make your bucket private
+        if you are planning to host a static webiste, unchekc this bo so that
+        everyone can access your website.
+
+step6:bucket versioning
+      If Versioning is enabled → restore from previous versions.
+        If not versioned and no backup → recovery not possible.
+protect from accidental delete/overrid
+
+step7: we have encryption option
+step8: click on create bucket
+
+**-----------------------------**
+uplod a file in Amazon s3 bucket
+
+clic on bucket name that you have created, go to the Objec tab
+clic on upload button to upload file or create folder to create subflder 
+inside the bucket
+
+after uploading an file
+        we need to select 
+        storage class on properties file
+
+----------------------------------------------------------------------------------------
+| Class                    | When to use                                    | Cost     |
+| ------------------------ | ---------------------------------------------- | -------- |
+| **Standard**             | Frequent access                                | High     |
+| **Standard-IA**          | Infrequently accessed, but immediate retrieval | Medium   |
+| **One Zone-IA**          | Not critical data                              | Lower    |
+| **Glacier Instant**      | Archival – fast retrieval                      | Low      |
+| **Glacier Flexible**     | 1–5 min retrieval                              | Very Low |
+| **Glacier Deep Archive** | Long-term compliance                           | Lowest   |
+----------------------------------------------------------------------------------------
+Automate movement to cheaper storage:
+
+        Move to IA after 30 days
+        Move to Glacier after 90 days
+        Delete after 365 days
+
+finally try to delete that budet
+permanently delet the object
+
+now go to bucket> go to properties> enable bucket version > SAVE changes
+
+now try to delet the file> you may get delete object type instead of permenantly delete
+        Delete marker  
+        you can retireve your object by deleting this / enable version
+
+we have several option to do with our object
+
+go to properties on object
+1.encruption  = using key
+        types of Encryption:
+        1. SSE-S3 - s3 managed key
+        2.SSE-KMS = customer managed key
+        3.SSE_c = your bring your own key
+2. Inteligent tiering archieve configuration = 
+                we can create a poilicy like after 30 days it move to standerd..
+
+3.server access logging = use cloud watch, to check bucket access log to check health of log
+4.cloud trail data event = to check  acces log of object level
+
+5. Event Notification = sen a nofiti when specific event occuer on you bucket
+6. Transfer Accelerarion - for fast transfer
+        what is the differenc between 
+        ssd - input output file transfer speed 
+        hardwar - some bit slow
+7. object lock - write once read many (worm) only one time we can edit and many time read
+8. Requestor Pay -  pay to see my bucket like anonymouse access to the bucket is disabledd
+
+permission
+
+1.Buket policy = 
+        json format applied at bucke level
+        used to allow public access,deny access, cross acount access
+        for eg specifically you need to privide access s3 but this bucket access revoking
+        to give speicific bucket acees 
+2. metrices
+        total bucket size
+        total nmber of objects
+
+Management:
+1. lifecycle configuation = to set an object lifyclye
+2. replication rule - to copy the same bucket on some other area like duplicate or replica
+
+Access point::
+for eg this is my bucket name : 29-07-2025akil
+but i gave access point name like below,
+29-07-2025akil-1  - i can give this to one user
+29-07-2025akil-2  - to another user
+29-07-2025akil-3- ..
+
+so that gave that access point to different persons dev,tester,etc
+
+
+
+
+
+
+
+
+
+
+
+
