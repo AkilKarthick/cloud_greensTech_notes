@@ -2,36 +2,52 @@ aws interview question:
 
 what is EC2 instance and its types?
 
-It's a virtual server in the cloud that I can launch to host applications or run workloads.
-EC2 - elastic compute cloud;
+EC2 - elastic compute cloud - A virtual server in AWS
+used to Host appliction,
+Deploy microservice, 
+Run Scripts,
+Host Backend System, 
+launch test enviromnets etc
+
 a web servive that provide resizable compute capacity in the cloud allow you to run virtual machine(intance ) on AWS
 
-common instance types are:
+Instance types are:
 
-General Purpose: t4g, t3, t2, m6g, m5
-Compute Optimized: c7g, c6g, c5
-Memory Optimized: r7g, r6g, r5, x2
-Storage Optimized: i4, i3, d2
-Accelerated Computing: p4, p3, inf1
+1.General Purpose: t4g, t3, t2, m6g, m5 | t2/t3.micro → General Purpose (Free-tier)
+2.Compute Optimized: c7g, c6g, c5
+3.Memory Optimized: r7g, r6g, r5, x2 
+4.Storage Optimized: i4, i3, d2
+5.Accelerated Computing: p4, p3, inf1
 
-2. steps to launch ec2 instances?
+forEG:
+Your application needs to process heavy CPU workloads. Which EC2 family do you choose?
+Answer: Compute-optimized (C series).
+
+
+------------------------------
+steps to launch ec2 instances?
 
 loginto aws console-ec2 dashboard
-click launch ec2
-choose an ami amazon machine image
----- is a template that contains the software configuration (OS, application server, applications).
-select instance type eg(t2.micro)
-configure instance details
-add storage
-configure security group
-launch and download the key pair
+1.click launch ec2
 
-for eg creatinnf free tire
+2.choose an ami amazon machine image
+      is a template 
+      that contains the software configuration (OS, application server, applications).
+
+A.select instance type eg(t2.micro)
+      configure instance details
+B.add storage
+C.configure security group
+      allow inbout/outboud traffic
+D.launch and download the key pair
+-----------------------------------
+
+forEG: on launching EC2 free tire
 give 
 step1: name and tag >
       ami ie os needed for eg(amazon linux/mac os/ ubuntu / windows/ redhat/suse linux/debian)
       select free tire elligible eg microsoft windows server 2022 base
-step2:then select instanve type
+step2:then select instance type
       for a sever how much ram/memory is needed ,how many virtual cpu is needed
       there are multiple family present on the intance type select based up on your need
       t2.micro free tire one 
