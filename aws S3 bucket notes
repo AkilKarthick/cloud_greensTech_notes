@@ -99,8 +99,11 @@ permanently delet the object
 now go to bucket> go to properties> enable bucket version > SAVE changes
 
 now try to delet the file> you may get delete object type instead of permenantly delete
-Delete marker  > you can retireve your object by deleting this / enable version
+        Delete marker  
+        you can retireve your object by deleting this / enable version
+
 we have several option to do with our object
+
 go to properties on object
 1.encruption  = using key
 2. Inteligent tiering archieve configuration = 
