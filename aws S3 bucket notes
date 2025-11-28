@@ -71,7 +71,9 @@ step5: block public access- to make your bucket private
 
 step6:bucket versioning
       If Versioning is enabled → restore from previous versions.
-        If not versioned and no backup → recovery not possible.        
+        If not versioned and no backup → recovery not possible.
+protect from accidental delete/overrid
+
 step7: we have encryption option
 step8: click on create bucket
 
@@ -86,12 +88,21 @@ after uploading an file
         we need to select 
         storage class on properties file
 
-standard              - adikari use panura data \ frequenty accessed data morethan once a month wih millisecond acccess
-intellignet tiering   - 
-one zone IA
-glacier instant retreievla
-glacier flexible
+----------------------------------------------------------------------------------------
+| Class                    | When to use                                    | Cost     |
+| ------------------------ | ---------------------------------------------- | -------- |
+| **Standard**             | Frequent access                                | High     |
+| **Standard-IA**          | Infrequently accessed, but immediate retrieval | Medium   |
+| **One Zone-IA**          | Not critical data                              | Lower    |
+| **Glacier Instant**      | Archival – fast retrieval                      | Low      |
+| **Glacier Flexible**     | 1–5 min retrieval                              | Very Low |
+| **Glacier Deep Archive** | Long-term compliance                           | Lowest   |
+----------------------------------------------------------------------------------------
+Automate movement to cheaper storage:
 
+        Move to IA after 30 days
+        Move to Glacier after 90 days
+        Delete after 365 days
 
 finally try to delete that budet
 permanently delet the object
