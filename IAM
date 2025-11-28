@@ -12,9 +12,7 @@ A member with an ID card can enter the office.
 AWS:
 
 User → an individual identity created inside AWS
-
 Groups → collection of users
-
 Roles → temporary privileges
 
 Example: Client visits → you give temporary visitor ID / temporary access
@@ -35,9 +33,7 @@ AWS resources example: EC2 instance
 You can access/modify/manage resources via:
 
 Console (GUI)
-
 AWS CLI
-
 SDKs (API calls)
 
 Applications work using:
@@ -49,33 +45,23 @@ SDK = Software Development Kit (used to integrate AWS API)
 🔹 Creating an IAM User (Example)
 
 Open IAM → IAM Dashboard
-
 Create User
-
 Username: ram
-
 “Provide user access to AWS Management Console” → optional
-
-💡 Real-time hint:
+    💡 Real-time hint:
 Companies never give root account.
 Even admins use IAM user, root is used only for billing or account recovery.
 
 Set custom password
-
 Example: Admin123
 
 Set Permission
-
 Choose Attach policy directly
-
-AWS Managed / Customer Managed
+    AWS Managed / Customer Managed
 
 Example: IAMReadOnlyAccess
-
 Create User
-
 You get:
-
 Sign-in URL
 
 Username
@@ -123,12 +109,9 @@ If no permissions → you will get:
 🔹 Creating a Group
 
 Create group: DEV
-
-Add user: ram
-
-Attach policies:
-
-Example: IAMFullAccess
+    Add user: ram
+    Attach policies:
+    Example: IAMFullAccess
 
 Max: 10 policies per group
 
@@ -143,24 +126,16 @@ One IAM user can have maximum 2 access keys.
 🔹 AWS CLI Installation & Configuration
 
 Check version:
-
-aws --version
-
-
+    aws --version
 Try command:
-
-aws s3 ls
+    aws s3 ls
 Error:
 ❗ Unable to locate credentials
-
-Configure credentials: using 'aws configure
+Configure credentials:
+    using 'aws configure
 
 so for eg
-it is not secure to configure your credentials 
-on a server which is used across by team also 
-
-
-
+it is not secure to configure your credentials , on a server which is used across by team also 
 It asks: below details
 
 AWS Access Key ID:
@@ -180,14 +155,12 @@ This creates:
 For siva:
 
 aws configure --profile siva
-
 Then use:
-
 aws s3 ls --profile siva
 
 you can create access key by clicking on
 1.select cli access
-then you got th access key with secrete key(one time viewinog)
+then you got th access key with secrete key(one time viewing)
 
 cusot
 
@@ -202,8 +175,7 @@ inline policy is imline managed we can add it to the user/group directly
 custom managed:
 means you created the policy,
 you can be shared across group/user/roles
-even you delete this it will reamain their
-this is AWS managed Type
+even you delete this it will reamain their, this is AWS managed Type
 
 🔹 Creating Custom Policy (Example) 
 using visual & Json
@@ -250,16 +222,16 @@ arn:aws:IAM::123423:group/{Instanceid}
 
 
 ROLE:
-create a role
-1.select the trusted entity first (for authentication like SAML 2.0 
-    do select AWS service
-we can crete a cusstom trust policy as well!
-
-2.ADD permission
-3.name.review and do create Role!
-
-and attach this role to the EC2 instance we created to view IAM user list on 
-the created EC2 instanace with out doing aws configure
+    create a role
+    1.select the trusted entity first (for authentication like SAML 2.0 
+        do select AWS service
+    we can crete a cusstom trust policy as well!
+    
+    2.ADD permission
+    3.name.review and do create Role!
+    
+    and attach this role to the EC2 instance we created to view IAM user list on 
+    the created EC2 instanace with out doing aws configure
 
 
 
