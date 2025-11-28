@@ -23,6 +23,10 @@ forEG:
 Your application needs to process heavy CPU workloads. Which EC2 family do you choose?
 Answer: Compute-optimized (C series).
 
+EC2 used EBS as its hard sids
+EBS type are SSD and HDD
+you can increase time at any time
+snapshot = backups
 
 ------------------------------
 steps to launch ec2 instances?
