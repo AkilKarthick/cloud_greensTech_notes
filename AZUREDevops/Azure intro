@@ -1,1 +1,61 @@
 Azure intro
+
+cloud basics
+
+IAAS = they provide (server) + OS + software
+
+  appliction|Date|runtime|middleware|OS = you manage
+  |vitualzation|server|storge|networking = provier manage
+
+PAAS = they provide (server+ OS )+ software
+
+  appliction|Date = you manage
+  |runtime|middleware|OS|vitualzation|server|storge|networking = provier manage
+
+SAAS = they provide (server + OS + software ) 
+
+  appliction|Date|runtime|middleware|OS |vitualzation|server|storge|networking = provier manage
+
+---
+
+High Availbility
+
+to consider a cloud region means it should have atleast 3 Availbilty zone(Data Centers)
+REgion ->3 AZ
+
+AZURE:
+if a company used microsoft tool means they prefer AZure
+AZURE is bit cost less than AWS
+
+Azure free tire account 30 days only free!!
+
+Server Creation: VM : on aws: we have EC2
+
+how to crate a VM!
+
+azure login portal
+aka.ms
+
+what is resoure group? on Azure?
+  one a azure account - it has muktple subscription
+  on a single subscription it has multiple resoure group
+  this is for isolation!
+
+consider i have two applition
+
+Ecommerse -> i have a subscription ->
+              i manage multple enviroment therir (dev, test, uat)
+              all the above are ResoureGroup
+              inside ResoureGroup (for dev 2 store, for teset mange some like this i segerate!
+
+without (subscription & ResourceGroup) i canot able to create a Resoure wit in AZ
+
+how to create a vm!
+
+click on create ->
+
+it ask subscription
+  
+
+
+
