@@ -1,0 +1,82 @@
+Azure disk
+
+agenda:
+
+how to add disk while creation of VM? also check whether it is showin internall or not?
+if not showing means then how to format it?
+how to add this on Existing machine?
+
+Types of Disk
+
+1.OS Disk  = machine oS is presnt here
+2.Empty Disk = used for seconday to extend usage purpose
+3.Temporary Disk = default we have one temporate &OS dis
+
+root AMI(odisk) is on AWS
+add disk(empty) is on AWS
+no temporary dism on AWS
+
+
+step1: create a VM
+  subscritpion:
+  ResoureGroup:
+  instanceDetails
+  Vm name
+  Instance details
+  virtula machine name;
+  Region:
+  Availbility Zone:
+  Zone Options;
+
+Size: n number of series
+
+authntication : password
+inbound rules
+
+OS Disk: 
+OS disk type: 
+  premium SSD
+  standard SSD
+  Standard DHDD
+
+create or attach a new disk | attach an existing disk
+
+
+
+on linux 
+
+df -h
+lsblk
+mkfs.  // to view linux file system(drive)
+
+going to change the raw disk to linux oriented 
+
+mkfs.ext4 /dev/sda
+
+do mount a directory 
+mkdir ak
+
+mount /dev/sda ak
+
+to unmount 
+
+unmount ak // this will unmoun
+
+so what is temporary mount?
+if you restart your machine this will get unmounted!!
+
+
+then how to do permanent mount?
+
+/etc/fstab - you have to do permanent mount
+
+etc - means configuration file
+
+
+how to take snapshots? backup
+
+
+
+
+
+
