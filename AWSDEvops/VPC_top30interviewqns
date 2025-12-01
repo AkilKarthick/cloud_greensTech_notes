@@ -1,0 +1,32 @@
+what is VPC
+your own isolated n/w env with in AWS
+
+2.what is cidr block why we are sing this?
+classelss inter domain routing
+defined IP range
+for eg /16 gives 65,536 ips = enough to create many subnets
+
+3. how do you decide subnet ip rnages?
+break vpc ip range into smaller /24 blocke (256ips per subnets)
+
+difference btwn public and private subnet
+public - route to igw 
+private - route to NAT gatway
+
+5.how do you convert a suvbnet into public subnet?
+add route 0.0.0.0/0 -> internet gateway
+
+6. what is ig?
+enable inbout+outboutn internte access
+
+7.what is nat gateway? why do we use it?
+allo private instnaces to reach internet without exposing them.
+
+8, can multipel subnet can use the same route table?
+yes
+
+9.what is vpc peering?
+private connection between two vpc
+
+vpc peering vs transit gateway?
+transit gateway -> hub & for many vpc's
