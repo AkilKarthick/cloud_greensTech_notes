@@ -1,0 +1,96 @@
+ELB (Elastic Load Balancing)
+
+ELB distributes traffic across multiple EC2 instances automatically.
+It improves availability, fault tolerance, and scalability.
+
+3 type of LB
+
+1️⃣ ALB – Application Load Balancer (Most used)
+    Layer: Layer 7 (HTTP/HTTPS)
+    Used for:
+    Microservices
+    Path-based routing (/user, /orders)
+    Host-based routing (api.myapp.com, admin.myapp.com)
+    Targets: EC2, ECS, Lambda, IPs
+Key features:
+  Supports WebSockets
+  Supports redirects & fixed responses
+  Advanced routing rules
+
+Interview line:
+✔ “We use ALB for web applications because it supports intelligent Layer 7 routing.”
+
+2️⃣ NLB – Network Load Balancer
+  Layer:   Layer 4 (TCP/UDP)
+  Used when you need:
+    Ultra-high performance
+    Millions of requests/second
+    Very low latency
+    Static IP support
+  Common with:
+    Gaming servers
+    Financial systems
+    VPC-to-VPC connectivity
+
+Interview line:
+✔ “We choose NLB when performance and static IPs are required.”
+
+-----------------
+
+classic LB
+support both l4 and l7, not recomended for new architectur
+clb is legacy, 
+alb/nlb are the modern options
+
+
+Auto Scaling – Two Types
+Vertical Scaling
+  Increase instance size
+  Example: t2.micro → t2.large
+Horizontal Scaling
+  Increase instance count
+  Example: 2 servers → 10 servers
+ELB + Auto Scaling = High Availability architecture
+
+⭐ When Creating a Classic Load Balancer (CLB)
+Step 1 → Create Launch Template
+  Name: MY-LT
+  OS: Amazon Linux 2023
+  Instance type: t2.micro
+  Security Group: ALL TCP (0–65535)
+  User-data:
+#!/bin/bash
+  yum install httpd -y
+  service httpd start
+  echo "<h1>This is my LB instance $(hostname)</h1>" > /var/www/html/index.html
+
+👉 Launch template does NOT create instance.
+It’s just a blueprint.
+
+Step 2 → Create Classic Load Balancer
+  Settings:
+    Name: clb
+    Scheme:
+    Internet-facing → can hit from browser
+    Internal → only inside VPC
+    Network: default VPC + select subnets 
+    Security Group: all-tcp  
+    Listener: HTTP 80 → HTTP 80
+
+Step 3 → Create Auto Scaling Group (ASG)
+    ASG Name: ASG
+    Template: MY-LT 
+    Subnets: select all 
+    Load Balancer: attach Classic Load Balancer
+    Desired capacity: 2  
+    Min: 2
+    Max: 4
+👉 Now autoscaling creates instances AND attaches them to CLB
+
+How to Test?
+
+Open EC2 → see 2 instances running
+Hit instance public IP → page shows host name
+Hit Load Balancer DNS name → it will switch between both servers
+Terminate one instance → ASG creates a new one → proves auto scaling work
+
