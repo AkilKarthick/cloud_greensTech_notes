@@ -35,8 +35,8 @@ for Applicaion LB
   need to create LB
   set the path based routing - rules
 -----------
-
-1st laucnh template - create it
+step1:
+Create  laucnh template - create it
   name=MY-LT
   ami & os image = aazon linux 2023 6.1
   intance type = t2.micro
@@ -54,6 +54,7 @@ for Applicaion LB
 a ALL tcp security group created , when next time you go there we can use that means 
   no need to open each port specifically
 storage - no change
+
 Advanced details::
   need to give one 
   
@@ -66,10 +67,10 @@ finally -----create launch instance
 
 only a template is created not the ec2 instance
 
-now create loadbalancer
+step2: now create loadbalancer
+go to EC2>load Balancer>compare and selct load balacner Types:
 
-click on classic lb
-create a classic loadbalancer
+A.click on classic lb & create a classic loadbalancer
 give basic configuration
   lb name = clb
   scheme:
@@ -77,39 +78,37 @@ give basic configuration
     internal - can't able to hit thsi on browser
 
 network mapping:
- slelect default vpc
+  slelect default vpc
   select availability zone and subnets
   security group: all-tcp
   listener and routing: http 80 and http 80
-  ---create loadbalancer
+
+create loadbalancer
 
 so far we created 
-  load balancer
-  template
-we didn't created EC2 instance right
-
+  load balancer& template !! we didn't created EC2 instance right
 using autoscaling we connect, 
   we give lb and template to autoscaling so that it can connect.
 
 Auto sclaing group--------
 
-name: ASG
-template : my-LT select your
-next
-subnet selct all
-balanced best effort AZ
-next
-loadbalancer- attach to an existing lb  (classic loadbalancer)
-for 
-application,network & gateway loadbalancer- we use target group to connect the load balancer
-next
-configure group size & scaling -
- groupsiz
-desired capacity- specifigy your group size -2
-
-scaling-
- min= 2 max desired capacity =4
+ name: ASG
+ template : my-LT select your
  next
+ subnet selct all
+ balanced best effort AZ
+ next
+  loadbalancer- attach to an existing loadBalancer  (classic loadbalancer)
+ for hint(for class we can direclty connect instnace )
+  application,network & gateway loadbalancer- we use target group to connect the load balancer
+ next
+ configure group size & scaling -
+  groupsiz
+ desired capacity- specifigy your group size -2
+ 
+ scaling-
+  min= 2 max desired capacity = 4
+  next
 do create Auto scaling group
 
 now instance get created, by use autoscaling group + lb connected too
