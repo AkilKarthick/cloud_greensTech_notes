@@ -1,0 +1,157 @@
+elastic load balancer
+
+elastic = choose autoscaling (automatic a server count increse/decreas)
+
+for a application where does load balancer present?
+
+for eg(facebook login )
+when user hit the url -> it go to the loadbalancer\ here the LB tell where & which server to go
+-------
+we have 4 types of Loadbalancer
+
+1.CLASSIC    - previous generation lb - distributing traffic across applicaton & n/w layer
+2.APPLICATION - work only on Applicaiton layer 7 , for routing http & https slow traffice (microservice based archi)
+3.NETWORK - work on transport layer 4 (quick one to handle traffice) workon tcp/udp
+4.GATEWAY - work on n/w layer  (ip based ) 
+-------
+ Autoscaling types
+
+1.vertical - size increase
+2.horizontal - count increase
+
+if we are goint to create classic LB?
+
+  we need to have- launch Template
+  -create on Load balancer
+  - need to connect both and create autoscaling group
+hint:
+1 server, 1 template = 10 serfver createed from 1s,1t = classic lb is fine
+when we go with multiple application with a single applicaiton = we go with application Lb 
+----------
+for Applicaion LB
+
+  2 instance
+  2 target group
+  need to create LB
+  set the path based routing - rules
+-----------
+step1:
+Create  laucnh template - create it
+  name=MY-LT
+  ami & os image = aazon linux 2023 6.1
+  intance type = t2.micro
+  keypair =
+  n/w setting la
+  this is a appliction nala we need to create port 80, but already we have alltcp
+  at tcp - means all port is enabled
+  how to create altcp?? therla
+    click on create secutiy group!
+    provide, secrity group name, descriptoin
+    select your vpc
+    on inbound security Group rules:
+    Type - ALL TCP | port range : 0-65535
+    source type - channged custom to anywhere  
+a ALL tcp security group created , when next time you go there we can use that means 
+  no need to open each port specifically
+storage - no change
+
+Advanced details::
+  need to give one 
+  
+  script#! /bin/bach
+  yum install httpd -y
+  service httpd start
+  echo <h1> ths is my LB instance $(hostname) </h1> " ? /var/www/html/index.html
+
+finally -----create launch instance
+
+only a template is created not the ec2 instance
+
+step2: now create loadbalancer
+go to EC2>load Balancer>compare and selct load balacner Types:
+
+A.click on classic lb & create a classic loadbalancer
+give basic configuration
+  lb name = clb
+  scheme:
+    internet facing - you can hit this on brower
+    internal - can't able to hit thsi on browser
+
+network mapping:
+  slelect default vpc
+  select availability zone and subnets
+  security group: all-tcp
+  listener and routing: http 80 and http 80
+
+create loadbalancer
+
+so far we created 
+  load balancer& template !! we didn't created EC2 instance right
+using autoscaling we connect, 
+  we give lb and template to autoscaling so that it can connect.
+
+Auto sclaing group--------
+
+ name: ASG
+ template : my-LT select your
+ next
+ subnet selct all
+ balanced best effort AZ
+ next
+  loadbalancer- attach to an existing loadBalancer  (classic loadbalancer)
+ for hint(for class we can direclty connect instnace )
+  application,network & gateway loadbalancer- we use target group to connect the load balancer
+ next
+ configure group size & scaling -
+  groupsiz
+ desired capacity- specifigy your group size -2
+ 
+ scaling-
+  min= 2 max desired capacity = 4
+  next
+do create Auto scaling group
+
+now instance get created, by use autoscaling group + lb connected too
+you can hit using 
+  IP & loadbalancer DNS --- to view
+
+----
+
+now check go to the instance
+two got created 
+
+hit using public IP > this is my class ilb isntanve and host name pring onthe browser
+check with another IP
+
+now check with loadbalancer DNS name: you get the same ui 
+
+
+this is my classic LB instance ip-172-31-3-182.ec2.internal
+this is my classic LB instance ip-172-83-3-200.ec2.internal
+
+above UI mari mari loadbalancer  piruchu kudukum, 
+
+how can we check autoscal working we give minin 2 right!!
+
+if you terminate one instance--> 
+
+next 
+
+Application Load Balancer ?? pending!!! with 
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
