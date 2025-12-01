@@ -18,7 +18,53 @@ ans: choosing a large range like /16 so you can create many subnets later
 Subnets(public & private)
 -------------------------
 
-a 
+vpc is divided into subnets
+1.public subnets
+  a subnets it has internet access
+  it requires RouteTable -> InternetGateway
+
+used for :
+loadBalancer,NatGateway, Bastion Hosts
+
+2.Private Subnets:
+  no direct internet access
+
+used for:
+Appliction servers, Database,Redish,Internal services
+
+1.how do you make a subnet private
+Attach route: 0.0.0.0/0 -> Internet Gateway
+
+INTERNET GATEWAY
+----------------
+
+a managed AWS component that allow (inbound+outbound internets) for public subnets
+you attach one IGW per VPC
+
+NAT GATEWAY
+----------
+private subnet cannot reach internet directly so we use NAT
+expensie, fully managed, Highly availble & scales automatically
+
+NAT INSTANCE
+cheap but manual sccalable, ec2 insgtance as a NAT
+
+why do private servers need internet?
+to donwload patches, connect to s3, api calls  etc
+
+Route tables
+------------
+decide how traffic flow
+
+Security groups (SG)
+--------------------
+
+stateful -sg
+  only allow rules
+stateless- nacl 
+  has allow + deney rules
+
+
 
 
 
