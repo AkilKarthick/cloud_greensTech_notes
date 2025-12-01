@@ -1,1 +1,28 @@
 VPC
+----
+  vpc means virtual private cloud,
+  you owned a private Datacenter for you inside AWS
+
+what is CIDR Block?
+  cidr means:
+  classelss inter domain Routing!
+
+basically VPC required IP range; 10.0.0.0/16
+this 16 gives 65,536 ips- enough to create many subnets
+
+1.what CIDR do you choose for a VPC and why
+ans: choosing a large range like /16 so you can create many subnets later
+
+
+
+Subnets(public & private)
+-------------------------
+
+a 
+
+
+
+
+
+
+
