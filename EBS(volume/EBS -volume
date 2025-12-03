@@ -12,6 +12,31 @@ EBS:
 block level storeage for EC2 instance
 think of it like a harddisk attached to an Ec2 instance
 
+EBS Volume Types:
+1.gp3 - general purpose SSD (default)
+    3000 iops baseline (inputoutput per secnod)
+    cheat + fast
+    balanced performance
+used for boot voulme, normal appliction, Databse
+
+2.Io2/io1 -provisioned IOPS SSD
+    high performance
+    you choose IOPS manually
+used for large Databe, high frequency transaction system
+for EG: 1 EBS can attach to multiple EC2 for distributed workloads
+
+3.st1 - throughput optimized HDD
+for big data, streaming, logs
+high throughput
+low cost
+
+4.Sc1 -cold HDD
+low cost 
+rarely used
+
+
+
+
 keypoints:
 works only inside a single AZ
 can attach/detach to Ec2
