@@ -1,0 +1,204 @@
+EC2-Advance
+
+ec2- 1ebs + 1 ebs
+
+One EC2 instance can attach multiple EBS volumes (up to 27 for most instance types)
+for an one EC2- you can add 100 extra EBS, but varies official limit by instance type
+
+1 EC2 server - add 100 EBS
+1 EBS - max size 16TB, 
+
+EBS:
+block level storeage for EC2 instance
+think of it like a harddisk attached to an Ec2 instance
+
+EBS Volume Types:
+1.gp3 - general purpose SSD (default)
+    3000 iops baseline (inputoutput per secnod)
+    cheat + fast
+    balanced performance
+used for boot voulme, normal appliction, Databse
+
+2.Io2/io1 -provisioned IOPS SSD
+    high performance
+    you choose IOPS manually
+used for large Databe, high frequency transaction system
+for EG: 1 EBS can attach to multiple EC2 for distributed workloads
+
+3.st1 - throughput optimized HDD
+for big data, streaming, logs
+high throughput
+low cost
+
+4.Sc1 -cold HDD
+low cost 
+rarely used
+
+---------
+IOPS - input/output operation per sec
+Throughput - amout of data processed per seconds
+
+gp3 → 3,000 IOPS
+io2 → up to 256,000 IOPS
+st1 → throughput optimized
+sc1 → cold storage
+
+Add EBS Multi-Attach (Very Important)
+
+    Only for io2 volumes.
+    One EBS can be attached to multiple EC2 instances (same AZ).
+    Used for:
+        Distributed workloads
+        Cluster application
+
+keypoints:
+works only inside a single AZ
+can attach/detach to Ec2
+persistent storage ( data stays even if Ec2 stops)
+supports snapshots(s3 based backups)
+
+feature od EBS
+
+1.Durability( 99.9999 reliabilty)  data is stored across multiple servers in the same AZ
+2.Envryption KMS
+    enable EBS encruption for snapshots, voume data and data in transit
+
+Types of storage-
+    object storage - s3
+    block storage- EBS
+    file storage - ???
+
+we are going to add -Extra volume-  by hititng -advance option for both windows and linux
+  1.add new volume
+  2.size 5gb and 
+     A.change 'yes' for Delete on termination option
+when you create EC2: 
+    Root volume has Delete on Termination = Yes
+    Extra volumes have Delete on Termination = No by default
+Meaning:
+    If EC2 is terminated → root EBS gets deleted
+    Extra volumes stay in your account (you will be billed)
+
+do launch the 'windows instance
+----------     
+on WINDOWS:
+     open disk Management
+     open the unallocated disk 5gb
+     make it as online by right click
+     and do intialize disk option too > it will be on unallocated 
+       now select New Simple Volume click on Next ,
+       you can split and use or use the same as per your need
+----------
+for LINUX:
+1.  df -h = to see the disk file system on human readable way
+            it will only show the usage disk not the extra volume we have added 
+
+  /dev/xvda1  8.0gb
+
+2. lsblk =  list block to see the hidden storage of created volume
+          we can able to see the 
+            1.xdvda  8gb
+            2.xvdb  3gb 0 disk
+     if third voulem means 
+            3.xvdc  2gb like that 
+
+3. firstly need to specify this unallocated volume
+
+  file -s /dev/xvdb
+  you get, /dev/xvdb: data
+then create a file System:
+
+ now  you volume is  a raw volume, so make file system for linux ext4 type volume 
+   >> mkfs -t ext4 /dev/xvdb
+
+make file system -t for ext4(volume) to dev/xvdb path
+   still it won't show on file system same like windows, but on linux you need to create a 
+   directory using 
+   
+   >> mkdir greens
+
+   now list those using ls
+   now you need to mount this greens folder with 3gb volume. to commmunicate those
+
+   mount /dev/xvdb greens/
+   df -h
+
+   now /dev/xvdb 3gb will list now on the file system after mouting
+
+for permanent Mount:
+    add to  /etc/fstab  for auto-mount on reboot:
+    /dev/xvdb /greens ext4 defaults,nofail 0 0
+very important for devops interview
+----------------------------
+SNAPSHOT = backup of my ebs--
+
+every 15 to 30 min backup for volume happne on real time 
+so the concept is even the server crashed we can take backup with volume 
+
+backup stored in S3 internally
+snapshots can be copied to other regions
+snapshot>volume>attach to EC2
+
+   touch hi hello hey
+   this will create three new file on greens folder
+
+     go to snapshot on the dashboard comes under elastic Block storeage list
+       going to create a snapshot for 3gb
+
+       create snapshot
+       resource type -> select voulume -> create snapshot
+
+       to use this snapshot just go to instance 
+       launch instance
+
+       there under storage(volumes) we have advanced option 
+       there we have snapshot option is there do select you created listed snashot on the drop down
+         kindly give delete on termination to yes
+
+         no need to mount it will format the disak of snapshot just mkdire and see 
+
+Snapshots are incremental:
+
+First snapshot = full backup
+Next snapshots = only changed blocks
+
+Even if you modify 10 GB of a 1 TB volume, snapshot stores only 10 GB changes.
+
+EBS is AZ-Scoped (Very Important!)
+
+    EBS volume can be attached ONLY within same Availability Zone.
+    If your instance is in:
+    ap-south-1a → the EBS must be in 1a
+    ap-south-1b → cannot attach a 1a volume
+    To move EBS to another AZ:
+    ✔ Take snapshot → create new volume in new AZ → attach to EC2
+--------------------------------
+
+        1. public ip- dynamic ip (it will change whenever we start/stop our ec2)
+        2. privte ip= static ip (fixed a iurukum)
+
+         elastic ip --> static ip
+
+go to elastic IP> allocate elastic IP address > 
+then go to actions> associate Elastic ip address to any Instance
+
+sso you can get the elasetic ip address for you Ec2 instance
+
+
+| Storage Type    | Use Case                     | Protocol | Key Feature                     |
+| --------------- | ---------------------------- | -------- | ------------------------------- |
+| **EBS (Block)** | Attached to EC2              | Block    | Low latency, per-AZ             |
+| **EFS (File)**  | Shared storage for many EC2s | NFS      | Can mount across many instances |
+| **S3 (Object)** | Any kind of file storage     | REST API | Infinite capacity + cheaper     |
+
+       
+       
+   
+   
+   
+   
+  
+  
+  
+       
+       
