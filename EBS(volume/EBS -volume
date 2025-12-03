@@ -20,23 +20,28 @@ supports snapshots(s3 based backups)
 
 feature od EBS
 
-Durability( 99.9999 reliabilty)  data is stored across multiple servers in the same AZ
-Envryption KMS
-enable EBS encruption for snapshots, voume data and data in transit
-
+1.Durability( 99.9999 reliabilty)  data is stored across multiple servers in the same AZ
+2.Envryption KMS
+    enable EBS encruption for snapshots, voume data and data in transit
 
 Types of storage-
     object storage - s3
     block storage- EBS
     file storage - ???
 
-we are going to add -Extra volume-  by hititng 
--advance option for both windows and linux
+we are going to add -Extra volume-  by hititng -advance option for both windows and linux
   1.add new volume
   2.size 5gb and 
      A.change 'yes' for Delete on termination option
-do launch the windows instance
-     
+when you create EC2: 
+    Root volume has Delete on Termination = Yes
+    Extra volumes have Delete on Termination = No by default
+Meaning:
+    If EC2 is terminated → root EBS gets deleted
+    Extra volumes stay in your account (you will be billed)
+
+do launch the 'windows instance
+----------     
 on WINDOWS:
      open disk Management
      open the unallocated disk 5gb
@@ -44,26 +49,25 @@ on WINDOWS:
      and do intialize disk option too > it will be on unallocated 
        now select New Simple Volume click on Next ,
        you can split and use or use the same as per your need
-
+----------
 for LINUX:
-1.  df -h 
-      to see the disk file system on human readable way
-      it will only show the usage disk not the extra volume we have added 
+1.  df -h = to see the disk file system on human readable way
+            it will only show the usage disk not the extra volume we have added 
 
   /dev/xvda1  8.0gb
 
-2. lsblk 
-          list block to see the hidden storage of created volume
+2. lsblk =  list block to see the hidden storage of created volume
           we can able to see the 
             1.xdvda  8gb
             2.xvdb  3gb 0 disk
      if third voulem means 
-          3.xvdc  2gb like that 
+            3.xvdc  2gb like that 
 
 3. firstly need to specify this unallocated volume
 
   file -s /dev/xvdb
-  you get, /dev/svdb: data
+  you get, /dev/xvdb: data
+then create a file System:
 
  now  you volume is  a raw volume, so make file system for linux ext4 type volume 
    >> mkfs -t ext4 /dev/xvdb
@@ -81,6 +85,11 @@ make file system -t for ext4(volume) to dev/xvdb path
    df -h
 
    now /dev/xvdb 3gb will list now on the file system after mouting
+
+for permanent Mount:
+    add to  /etc/fstab  for auto-mount on reboot:
+    /dev/xvdb /greens ext4 defaults,nofail 0 0
+very important for devops interview
 
 SNAPSHOT = backup of my ebs--
 
