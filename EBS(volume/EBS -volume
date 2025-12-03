@@ -34,8 +34,22 @@ low cost
 low cost 
 rarely used
 
+---------
+IOPS - input/output operation per sec
+Throughput - amout of data processed per seconds
 
+gp3 → 3,000 IOPS
+io2 → up to 256,000 IOPS
+st1 → throughput optimized
+sc1 → cold storage
 
+Add EBS Multi-Attach (Very Important)
+
+    Only for io2 volumes.
+    One EBS can be attached to multiple EC2 instances (same AZ).
+    Used for:
+        Distributed workloads
+        Cluster application
 
 keypoints:
 works only inside a single AZ
@@ -115,7 +129,7 @@ for permanent Mount:
     add to  /etc/fstab  for auto-mount on reboot:
     /dev/xvdb /greens ext4 defaults,nofail 0 0
 very important for devops interview
-
+----------------------------
 SNAPSHOT = backup of my ebs--
 
 every 15 to 30 min backup for volume happne on real time 
@@ -128,14 +142,11 @@ snapshot>volume>attach to EC2
    touch hi hello hey
    this will create three new file on greens folder
 
-     go to snapshot on the dashboard comes under
-     elastic Block storeage list
-
-     goin to create a snapshot for 3gb
+     go to snapshot on the dashboard comes under elastic Block storeage list
+       going to create a snapshot for 3gb
 
        create snapshot
-       resource type . select voulume
-        create snapshot
+       resource type -> select voulume -> create snapshot
 
        to use this snapshot just go to instance 
        launch instance
@@ -145,6 +156,22 @@ snapshot>volume>attach to EC2
          kindly give delete on termination to yes
 
          no need to mount it will format the disak of snapshot just mkdire and see 
+
+Snapshots are incremental:
+
+First snapshot = full backup
+Next snapshots = only changed blocks
+
+Even if you modify 10 GB of a 1 TB volume, snapshot stores only 10 GB changes.
+
+EBS is AZ-Scoped (Very Important!)
+
+    EBS volume can be attached ONLY within same Availability Zone.
+    If your instance is in:
+    ap-south-1a → the EBS must be in 1a
+    ap-south-1b → cannot attach a 1a volume
+    To move EBS to another AZ:
+    ✔ Take snapshot → create new volume in new AZ → attach to EC2
 --------------------------------
 
         1. public ip- dynamic ip (it will change whenever we start/stop our ec2)
