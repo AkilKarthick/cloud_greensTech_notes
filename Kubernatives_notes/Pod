@@ -1,0 +1,42 @@
+What is pod?
+All the container were present inside this pod, this pod will provide n/w and storage that is required for the container. For each POD it have a unique IP address. 
+Each pod is isolated from each other Pod , bcz each have unique IP 
+We can create multiple Docker container in a single pod is possible
+In real time application mostly for a single POD they maintain one container
+Bcz if containter B failed & container A is running , but k8s will restart the POD so container A also need to 
+Only for tighly coupled application they maintain in single pod
+For creating an POD we need to provide via yml file 
+Pod.yml
+apiVersions:v1 //is always v1
+Kind: Pod // means what are we going to create
+Metadata: //pod extra information
+	Name: podname (eg: my-simple-cal-pod
+	Labels: 
+		Project: calculator
+Spec: //  here we inform about our container that runngin on our pod
+	Containers:    //list of container
+		Name:java-calc
+		Image:adf/calaclut
+		Port:
+			containorPort: 8081
+		name: java-backend
+		image: simp/java-backend
+		ports:
+			containerPort: 8080
+now how to creat a Pod from this yml file?
+Kubectl apply -f   //  -f mena file
+Kubectl apply -f pod.yml       //pod created
+To see created pod
+Kubectl get pods
+To see pods Ip address
+	get pods -o wide
+ 
+
+Kubectl describe pods  pod-name    // tjis will return pod full details
+--------------
+
+A Pod is the smallest deployable unit in Kubernetes.
+It contains one or more containers that share the same network and storage.
+Every Pod has a unique IP address, making Pods isolated from each other.
+In real-time projects, we usually run one container per Pod for better fault tolerance, except for tightly coupled sidecar patterns.
+// it you wanna check whther the constinar is created or not to find the error on events!
