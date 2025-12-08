@@ -1,0 +1,191 @@
+Kubernatives   K8S
+
+Pod = collection of containers
+•	k8s -in kubernative we have pods
+•	pods -collection of containers or group of containers
+•	here we have -self healing- mechanisim we go for kubernatives instead of container
+•	self healing- automatic recreating mechanism
+k8s architecture
+1.	master node  - this will monitor
+2.	worker node  - this will run 
+cluster - collection of servers/nodes
+for all the cluster these componenets present which is in the SS
+1.	kubectl - is used to push the (.yaml file) present on admin machine TO cluster
+using admin machin we create a -cluster( contains master/worker nodes )
+ we have created manifest yaml file to create a pod on k8 cluster
+cluster contains: master & worker nodes
+master node
+components are  note: all component itself run as a pod 
+•	API server - brain of the cluster, 1st call scheduller
+•	Controller manager
+•	Scheduler - just schedule the pod, that told by api
+•	etcd  - storing all detais of cluster information like pod details 
+worker node1, worker node2
+components are
+•	kubelet - this will create pod as told by schdulior
+•	kube-proxy
+•	Pod (containers.. - pulled from dockerhub or ECR)
+1. need to create a cluster on kubernatives - using admin machine
+2. if you need to create a pod or any service you have to use .yaml extension file only
+3. .yaml file present on admin file
+once a cluster created !! what all service got created!
+1.nodes(EC2, 2.VPc, 3. load balancer(n/w LB) targer gp, policies got created automaticallys
+cluster types
+•	KOPs --  once a cluster created what all service got created!
+nodes(EC2, 2.VPc, 3. load balancer(n/w LB) targer gp, policies got created automaticallys
+•	KUBE-ADM
+•	MINI-KUBE
+•	AKS/EKS/GKE - master node create agathu only worker node, master node managed by them
+steps to create  CLUSTER
+first create a ADMIN machine on ubuntu flavour
+•	need to install 'KOPS Binary   kubernative cluster initiative
+•	need to intall ' KUBECTL kubernatives deployments
+Architecture of K8S:
+ 
+
+
+setup the binary setup and kubectl setup
+directly from internet we can install
+ 
+Here we did that moved to user/bin so that we can access from any where
+ 
+Also installed kubCTL
+ 
+Now need to login AWS on ubuntu server
+Check for the existing using aws –version  > initially aws is not there
+Install aws on Ubuntu server
+•	Apt install awscli         or azure
+ Now go to IAM on aws, do create a user and give full permission
+Hint: only two access key only we can create for a user 
+•	Aws configure
+•	Give accsss ID
+•	Secrete access key
+•	Default region name
+•	Default output format ; json
+Aws got configured
+Now need to EXPORT means setting the environment variable
+For EG: export age =19 & you can call like $age this return 19
+•	Export NAME=ajs.k8s.local   // this format only you need to give
+Now you need to give an bucket name for input, to store cluster details on s3 & also make sure versioning is enabled on that specific bucket
+•	Aws s3 ls
+•	Export KOPS_STAT_STORE=s3://bucketname
+Printenv – to see the environment setup variables
+Now we can create cluster using below command
+•	Kops create cluster –zones ap-southeast-1a $(NAME)
+Your cluster got initiated!! So cluster configuration has been created!!
+List the clusters with : kops get cluster  
+You can edit your cluster with  this command:
+Kops edit cluster ajs.k8s.local
+•	You can edit your node instance group: ie worker node
+•	You can edit your control-plane instance group: master node
+First customize the worker node using the below command
+•	Kops edit ig –name=ajs.k8s.local nodes-ap-southeast-1a
+Changed the maxmin to 2 to create 2 worker node
+ 
+And one 1 master node 
+Now finally configure your cluster with : kops update cluster –name ajs.k8s.local –yes –admin
+•	Now only your cluster got created !!
+Following will get created like VPc, LB, all necessary will create automatically
+So we done with cluster creations
+
+
+
+Now how to create a pod using different methods
+K8s object
+Creating pod with different behaviour and characteristics:
+•	Pod - just a basic pod got create alone -not using widely
+•	Replica set – first pod created along with replicset(desired = curent) replicat=3
+o	This will create n number of pods with same 
+o	If I delete the 3 pod meand within second those pod got recreate/replaced
+•	Deployment – pod + replicaSet + deployment strategy
+o	If current version pod is running at present if I wanna upgrade it to newer version to enable new version means  (rolling an update, canary, blue/green)  -- got created on independent 
+o	This is for stateless application like, frontend, BE, webserver, app server, 
+•	State full set – pod + RS + DS  dependent got created
+o	Eg :: 1st on created if stable 2nd one created after then goes on…
+o	This is database
+o	Use name won’t get changed that why statefull
+•	Daemon set: your pods got created under the condition of
+o	No of nodes = no of pods
+o	1 node == 1 pod 
+o	Used for monitoring purpose
+o	DaemonSet – used camel way
+o	
+
+After 10min validate your cluster
+•	Kops validate cluster
+You may get validation failed some times wait for 10min
+One your cluster is ready
+
+.yaml for PODS:  bold one is mandatory for all manifesting.yaml file
+apiVersion: v1
+kind: Pod    // api will identify by lookg into,what service going to create
+metadata:
+name: nginx
+spec:
+containers:
+- name: nginx
+image: nginx
+ports:
+containerPort: 80
+
+.yaml for ReplicaSet:  
+ 
+
+Lets see how to create a pod
+
+Vi pod.yaml
+Paste the file
+
+To check how many nodes
+Kubectl get nodes
+ 
+It will get displayed on the console too like an ec2 isntance
+To get pods kubectl get pods
+At initial you get no resources found in default name-space
+TO SEE NAMESPACE
+Kubectl get ns
+ 
+For segerate purpose, like if I need an application for food delvier or an ecommerce
+Going to create namespace for specific one
+ 
+Now need to transfer pod.yaml file via kubectl 
+Kubectl apply -f pod.yaml
+Pod/nginx created
+ 
+Now ngnix pod is in running status
+
+Kubectl get rs – see replicate set
+ 
+To delete a pod
+Kubectl delete pod podname
+That particular pod got deleted no self healing is worked for normal pod
+It wont get recreated for kind:prod
+
+For replica set: if you delete this pod means
+This will recreate new pod with different name, this is called stateless application
+No need to create in same name. just to ensure high availability
+Important: to delete the whole resource use what you have give on kind:name
+To delete the whole or else it got recreated the pods
+
+State full set
+
+It will recreate with same name after deleted one pods
+ 
+
+Kubectl get pods -o wide
+To get whete those pod got placed on  which nodes
+
+
+See here for deamon node got created on workder node like 1 pod on 1 node 
+Master node got unloxked initially , it will get unlocked via toleratinos
+
+ 
+
+
+How to enter in to pods 
+Kubectl exec -it podname
+This will logged into the pod
+Exit to get away from pod
+How to delte clusete 
+Kops delete cluster $NAME –yes
+
