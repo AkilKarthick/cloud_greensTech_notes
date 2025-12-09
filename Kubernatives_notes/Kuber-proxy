@@ -1,0 +1,116 @@
+kubernatives services
+---------------------
+
+this is used for pod communication, used for us to access pod
+
+via Ip address it can communicate right?
+
+let me tell with an eg: 
+
+you have two pod
+pod1 containd frontend built using react
+pod2 contains backend built using java
+
+for internal communication of two pod 
+
+if using IP menand
+
+pod1 (frontend)  : 10.0.0.1
+pod2 (backend)   : 10.0.0.2
+   
+If pod2 crashes, Kubernetes replaces it: then -self healing happened - then pod2 ip changed
+pod2 new IP: 10.0.0.3
+
+then how can it communicate ?? so in Kubernetes pods are called 'ephemeral'
+
+Now frontend (pod1) cannot call backend through IP because it changed.
+So Kubernetes gives us a Service: backend-service: 10.0.0.4  (stable IP)
+This Service IP never changes, even if pods come and go.
+
+service also do load balancer!
+
+this service is also we can create using manifest file
+
+so our service will confuse to which pod to sent so 
+we can use the 
+---------------------------------------------------
+How does Service know which Pod to send traffic to?
+---------------------------------------------------
+Through labels and selectors.
+
+Pod YAML---
+metadata:
+  labels:
+    app: backend
+
+Service YAML---
+  selector:
+  app: backend
+
+Service should send traffic to pods having label app=backend.
+------------------------------------------------------------------
+
+What is an Endpoint?
+
+
+endpoint - hold the pods ip address 
+
+An Endpoint is a Kubernetes object that stores the current pod IPs behind a Service.
+
+so during communication it provide these to service
+This list automatically updates when a pod dies or a new pod comes.
+
+How does the Endpoint get updated when pod IP changes?
+
+There is a controller called Endpoint Controller inside kube-controller-manager (master node).
+
+Its job:
+Watch pods
+Check their labels
+Match with Service selector
+Update Endpoint object with the new pod IPs
+
+so all these service stable-ip & endpoint  were maintained on a table  by kube-proxy
+
+for all Each node we have one kube-proxy
+
+kube-proxy jobs:
+
+Reads Services + Endpoints
+Programs iptables or IPVS rules
+Forwards request to correct pod
+
+so kubeproxy will send the rquest by collection detail form stable service and endpoints
+
+request forward ! done by kubeproxy!
+
+how end point know all these newly created pod IP after self healing1
+
+in master node we have controller manager
+endpoint controller!
+controller manger check the selector label and tell to endpoint
+
+
+
+flow:
+
+Pod created → gets IP
+Controller Manager’s Endpoint Controller checks labels
+Updates Endpoint object with pod IPs
+Service always points to Endpoints
+kube-proxy forwards traffic to correct pod
+
+
+
+| Component               | Job                                             |
+| ----------------------- | ----------------------------------------------- |
+| **Service**             | Stable IP + load balancing                      |
+| **Labels**              | Identify pods                                   |
+| **Selector**            | Choose which pods Service connects to           |
+| **Endpoint**            | Stores actual pod IPs                           |
+| **Endpoint Controller** | Automatically updates endpoint when pods change |
+| **kube-proxy**          | Forwards request to pod using iptables/IPVS     |
+
+
+
+
