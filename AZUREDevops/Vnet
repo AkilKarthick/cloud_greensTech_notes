@@ -1,0 +1,255 @@
+AZ Vnet
+
+a networking tool, isolate my 'cloud resource'
+
+vnet components:
+
+Ip
+cidr
+subnets
+routetable
+igw
+nat gw
+nsg
+-----------
+
+IP address:
+ internet protocol - used to call server
+
+types
+
+Ipv4 - 32 bit (12.24.23.23) four field separated by 3dots
+each field contains 8 bits
+
+ipv6 - 128 bit (it contains 8 fields)
+
+each field 16bit (contains alphabet and numbers
+
+once v4 soldout means they go to v6
+till we are using ipv4
+
+
+how to check if this ip is a valid or not?
+
+if it contains 0 to 255 (valid ip) 
+
+----------
+
+CIDR CLASSLESS INTERDOMAIN ROUTE
+
+
+valid Ip with /number
+10.0.0.0/24
+
+range of ip or set of Ips, more than one ip means cidr block
+
+
+32 -n = to find how may ip inside this!
+& 2powern
+EG:
+32-24 = 8
+2`8 = 256
+
+so in this CIDR block range it has 265 ip's it have
+
+anything power 0 = 1
+
+
+hint
+
+on-prem - if I create a vpc --> with range /24 means
+256 -2 = 254 ips only create allowed
+
+2 ips were reserved!
+1st and lst ip
+1st - for n/w
+lastip - 
+
+but in cloud
+
+only 251 only able to create 
+5 reserved
+1st
+last
+2nd
+3rd
+4th - these ip were reserved!! so not usable
+
+
+if I need 256 server means 
+I have to give cidr 23 bcz if contains 512 ips
+
+
+---
+subnets
+---
+
+if a vnet inside we are going to have 256 server means
+all servers are for different use cases
+so I have to isolate different server right
+
+50for preprod
+50 for prod
+etc
+
+for this use case we used subnets!
+
+
+1.public subnet (internet is their)
+2.private subnet (no internt)
+
+
+
+for a vnet
+
+if I create a vnet means I have to give cidr 
+10.0.0.0/16 means 65536 ips
+
+
+in Azzure Internet gateway is inbuilt
+but in AWS I have to create IGW
+
+here during vnet creation IGW is created automatically!
+
+
+
+public ip & public server is needed to connect to internet 
+
+so for pvt subnet
+I need to jump from pubsubnet to pvtsubnet
+
+jump/server /or / bastion host!
+
+
+if I need to update the pvt subnet server like patch update etc
+
+I need internet on pvut subnt
+
+so I need natgateway
+
+so create on nategw and connect with pvt subnet to get internet
+
+what is nsg?
+
+to secure server
+inbound
+outbound? means what
+
+
+
+
+
+
+
+====day2 vnet-------
+
+
+1create a vnet
+
+2 two subnets
+
+pubsubnet -vm
+pvtsubnet -vm
+
+jump from publicSubnet to privatesubnet ( 
+
+
+step1: create a vnet
+
+on azure go to virtual n/w service
+click on create
+on project details :
+subscription: Azure subscrption 
+ResourceGroup: Azurevnet
+instnaceDetails
+virtual n/w name: vnet-A
+Regions:
+
+Azure Bastion:
+a paid servie that provide secure RD/ssh connectivity to your VM over TLS
+when you connect via Bastion, your VM don't need public IP address
+
+disable above
+
+Ip Address:
+give cidr:
+10.0.0.0/16 means 65.536 address
+
+add subnets
+pub-subnet with 10.0.1.0/24
+pvt -subnet with 10.0.2.0/24 & enable pvt subnet check box
+
+do review and create virtual network
+
+---now create a Virutual machine---
+
+subscription: azure subscription
+Resource Group: Azure vnt
+virtual machine name: pub-vm
+az:authentication type: password type
+uername:
+password:
+disk:
+networking: here you need to select your Vnet
+Virtual n/w: VNET-A
+subnet: pub-subnet-A(10.0.1.0/24)
+puBLIC ip: provide pub ip
+review and create
+
+
+--create another VM for private subnet--
+do selet private subnet( don't provide public subnet)
+
+
+
+now going to jump from pub to private subnet
+
+from pubvm
+
+ssh azureuser@privateIp
+
+ssh azureuser@10.0.2.4
+password: admin123456
+
+now logged in to pvt-vm-a from pubvm
+
+now to get internet to private machine we need NAt GATEWAY
+
+CREATE natgateway
+
+subscription: azure subscription
+Resource Group: Azure vnt
+instance details
+nat gateway name: my-nat
+region:
+
+outbout ip
+ 
+public ip address:nat-ip
+
+subnet
+
+atleast one subnet must be connected
+virtual network: VNET-A
+subnet:pvt-subnet-A
+
+review and create
+
+
+using natgateway is the only way to provide internet to private subnet
+
+
+so far to long to a pvt machin we need pub machine needed
+but using Azure bastion
+i don't need pub machin i can login to pvt machin using this bastion
+
+
+	
+
+
+
+
+
+
+
+
